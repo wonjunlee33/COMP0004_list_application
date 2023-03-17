@@ -1,4 +1,4 @@
 <div>
-  <h1>Patient Data App</h1>
+  <h1>List Application</h1>
   <div class="clearBoth"></div>
 </div>
