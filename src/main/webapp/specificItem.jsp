@@ -28,7 +28,23 @@
     %>
       <li><%=key%>: <%=value%></li>
     <% } %>
-  </ul>  
+  </ul>
+  <form method="post" action="EditItemServlet">
+    <button type="submit" name="editItem" value="<%=request.getParameter("id")%>">Edit Item</button>
+  </form>
+  <form method="post" action="/runDeleteItem.html">
+    <input type="hidden" name="deleteid" value="<%= id %>">
+    <button type="submit">Delete</button>
+  </form>  
+  <% if (request.getParameter("deleteItem") != null) { %>
+    <%
+      String deleteid = request.getParameter("deleteid");
+      if(deleteid != null && !deleteid.isEmpty()) {
+        request.setAttribute("deleteid", deleteid);
+        // delete the item from the model
+      }
+    %>
+  <% } %>
 </div>
 <jsp:include page="/footer.jsp"/>
 </body>

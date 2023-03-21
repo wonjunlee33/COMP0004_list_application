@@ -3,6 +3,7 @@
 /Users/wonjunlee/Documents/Academics/UCL/Year1/COMP0004/coursework/COMP0004JavaWebAppExample/src/main/java/uk/ac/ucl/servlets/ViewItemListServlet.java
 /Users/wonjunlee/Documents/Academics/UCL/Year1/COMP0004/coursework/COMP0004JavaWebAppExample/src/main/java/uk/ac/ucl/servlets/ViewAddItemServlet.java
 /Users/wonjunlee/Documents/Academics/UCL/Year1/COMP0004/coursework/COMP0004JavaWebAppExample/src/main/java/uk/ac/ucl/main/Main.java
-/Users/wonjunlee/Documents/Academics/UCL/Year1/COMP0004/coursework/COMP0004JavaWebAppExample/src/main/java/uk/ac/ucl/servlets/DeleteItem.java
 /Users/wonjunlee/Documents/Academics/UCL/Year1/COMP0004/coursework/COMP0004JavaWebAppExample/src/main/java/uk/ac/ucl/servlets/SearchServlet.java
 /Users/wonjunlee/Documents/Academics/UCL/Year1/COMP0004/coursework/COMP0004JavaWebAppExample/src/main/java/uk/ac/ucl/servlets/ViewActualItemServlet.java
+/Users/wonjunlee/Documents/Academics/UCL/Year1/COMP0004/coursework/COMP0004JavaWebAppExample/src/main/java/uk/ac/ucl/servlets/DeleteItemServlet.java
+/Users/wonjunlee/Documents/Academics/UCL/Year1/COMP0004/coursework/COMP0004JavaWebAppExample/src/main/java/uk/ac/ucl/servlets/EditItemServlet.java

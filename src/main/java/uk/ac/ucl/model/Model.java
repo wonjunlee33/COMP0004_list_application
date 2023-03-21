@@ -45,7 +45,7 @@ public class Model
     }
 
     return result;
-}
+  }
 
   public void writeToJsonFile(HashMap<String, String> newItem) {
     try {
@@ -63,43 +63,43 @@ public class Model
     } catch (IOException e) {
         e.printStackTrace();
     }
-}
+  }
 
-public List<HashMap<String, String>> readJsonArray(File file) {
-    List<HashMap<String, String>> result = new ArrayList<>();
+  public List<HashMap<String, String>> readJsonArray(File file) {
+      List<HashMap<String, String>> result = new ArrayList<>();
+      try {
+          ObjectMapper objectMapper = new ObjectMapper();
+          JsonNode rootNode = objectMapper.readTree(file);
+          if (rootNode.isArray()) {
+              for (JsonNode node : rootNode) {
+                  TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {};
+                  HashMap<String, String> map = objectMapper.convertValue(node, typeRef);
+                  result.add(map);
+              }
+          }
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+      return result;
+  }
+
+  public void deleteItem(int id) {
     try {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode rootNode = objectMapper.readTree(file);
-        if (rootNode.isArray()) {
-            for (JsonNode node : rootNode) {
-                TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {};
-                HashMap<String, String> map = objectMapper.convertValue(node, typeRef);
-                result.add(map);
-            }
-        }
+      File file = new File("src/main/java/uk/ac/ucl/storage/items.json");
+
+      // Load existing JSON data into a list of maps
+      List<HashMap<String, String>> existingData = readJsonArray(file);
+
+      // Add new data to the list
+      existingData.remove(id);
+
+      // Write the updated list to the JSON file
+      ObjectMapper objectMapper = new ObjectMapper();
+      objectMapper.writeValue(file, existingData);
     } catch (IOException e) {
         e.printStackTrace();
     }
-    return result;
-}
-
-public void deleteItem(int id) {
-  try {
-    File file = new File("src/main/java/uk/ac/ucl/storage/items.json");
-
-    // Load existing JSON data into a list of maps
-    List<HashMap<String, String>> existingData = readJsonArray(file);
-
-    // Add new data to the list
-    existingData.remove(id);
-
-    // Write the updated list to the JSON file
-    ObjectMapper objectMapper = new ObjectMapper();
-    objectMapper.writeValue(file, existingData);
-} catch (IOException e) {
-    e.printStackTrace();
-}
-}
+  }
 
 
   // This also returns dummy data. The real version should use the keyword parameter to search

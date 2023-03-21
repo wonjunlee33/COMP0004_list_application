@@ -4,7 +4,7 @@ uk/ac/ucl/servlets/ViewItemListServlet.class
 uk/ac/ucl/model/Model$2.class
 uk/ac/ucl/main/Main.class
 uk/ac/ucl/servlets/ViewAddItemServlet.class
+uk/ac/ucl/servlets/DeleteItemServlet.class
 uk/ac/ucl/model/Model.class
-uk/ac/ucl/servlets/DeleteItem.class
 uk/ac/ucl/model/Model$1.class
 uk/ac/ucl/model/ModelFactory.class
