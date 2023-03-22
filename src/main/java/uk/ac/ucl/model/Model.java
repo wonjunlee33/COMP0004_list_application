@@ -30,10 +30,15 @@ public class Model
 
   }
 
-  public HashMap<String, String> formatInputForAdd(String input) {
+  public HashMap<String,String> getSpecificItem(int id) throws IOException {
+    ArrayList<HashMap<String,String>> items = getItems();
+    return items.get(id);
+  }
+
+  public HashMap<String, String> formatInput(String input) {
     HashMap<String, String> result = new HashMap<>();
 
-    String[] keyValuePairs = input.split("/");
+    String[] keyValuePairs = input.split("\\|");
     if (keyValuePairs.length % 2 != 0) {
         throw new IllegalArgumentException("Input string has an odd number of elements.");
     }
@@ -46,6 +51,21 @@ public class Model
 
     return result;
   }
+
+  public String deFormatInput(HashMap<String,String> item) {
+    StringBuilder sb = new StringBuilder();
+    for (HashMap.Entry<String, String> entry : item.entrySet()) {
+        sb.append(entry.getKey()).append("\\|").append(entry.getValue()).append("\\|");
+    }
+    
+    // get rid of last slash
+    String result = sb.toString();
+    if (result.endsWith("\\|")) {
+        result = result.substring(0, result.length() - 1);
+    }
+    
+    return result;
+}
 
   public void writeToJsonFile(HashMap<String, String> newItem) {
     try {
