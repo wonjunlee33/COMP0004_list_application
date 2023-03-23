@@ -22,6 +22,8 @@
         if (key.equalsIgnoreCase("url")) {
     %>
           <li><%=key%>: <a href="<%=value%>"><%=value%></a></li>
+    <% } else if (key.equalsIgnoreCase("item")) { %>
+          <li><%=key%>: <a href="<%=value%>"><%=value%></a></li>
     <% } else if (key.equalsIgnoreCase("image") || key.equalsIgnoreCase("img")) { %>
           <p><img src="<%=value%>"></p>
     <% } else { %>
@@ -56,6 +58,8 @@
     %>
   <% } %>
 </div>
+<p>Want to reference this item? Just use the following link:</p>
+<p>/specificItem.html?id=<%=id%></p>
 <jsp:include page="/footer.jsp"/>
 </body>
 </html>

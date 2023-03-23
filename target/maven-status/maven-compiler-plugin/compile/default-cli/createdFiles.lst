@@ -1,12 +1,14 @@
 uk/ac/ucl/servlets/ViewActualItemServlet.class
-uk/ac/ucl/servlets/EditItemServletPartOne.class
 uk/ac/ucl/servlets/SearchServlet.class
 uk/ac/ucl/servlets/ViewItemListServlet.class
 uk/ac/ucl/model/Model$2.class
+uk/ac/ucl/servlets/ViewItemListLabelPartTwoServlet.class
 uk/ac/ucl/main/Main.class
 uk/ac/ucl/servlets/ViewAddItemServlet.class
 uk/ac/ucl/servlets/DeleteItemServlet.class
-uk/ac/ucl/servlets/EditItemServletPartTwo.class
 uk/ac/ucl/model/Model.class
-uk/ac/ucl/model/Model$1.class
+uk/ac/ucl/servlets/EditItemServlet.class
 uk/ac/ucl/model/ModelFactory.class
+uk/ac/ucl/servlets/ViewItemListLabelServlet.class
+uk/ac/ucl/servlets/EditItemTwoServlet.class
+uk/ac/ucl/model/Model$1.class

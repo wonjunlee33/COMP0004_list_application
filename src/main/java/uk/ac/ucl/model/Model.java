@@ -55,12 +55,12 @@ public class Model
   public String deFormatInput(HashMap<String,String> item) {
     StringBuilder sb = new StringBuilder();
     for (HashMap.Entry<String, String> entry : item.entrySet()) {
-        sb.append(entry.getKey()).append("\\|").append(entry.getValue()).append("\\|");
+        sb.append(entry.getKey()).append("|").append(entry.getValue()).append("|");
     }
     
     // get rid of last slash
     String result = sb.toString();
-    if (result.endsWith("\\|")) {
+    if (result.endsWith("|")) {
         result = result.substring(0, result.length() - 1);
     }
     

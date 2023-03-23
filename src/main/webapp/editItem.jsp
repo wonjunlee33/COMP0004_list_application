@@ -5,19 +5,15 @@
 <body>
 <div class="main">
   <h1>Edit Item</h1>
-  <form method="post" action="/runEditItemTwo.html">
-    <input type="hidden" name="editid" value="<%= id %>">
-    <button type="submit">Edit</button>
-  </form>  
-  <% if (request.getParameter("editItem") != null) { %>
-    <%
-      String editid = request.getParameter("editid");
-      if(editid != null && !editid.isEmpty()) {
-        request.setAttribute("editid", editid); 
-      }
-    %>
-  <% } %>
+  <% 
+  String prevString = (String) request.getAttribute("itemToEditString");
+  %>
+  <form method="POST" action="/runEditItemTwo.html">
+    <input type="text" name="itemToEdit" value="<%=prevString%>" size="200"/>
+    <input type="submit" value="Edit"/>
+  </form>
 </div>
+<p>Word of advice: If you want to cancel the edit, just press Edit instead of using the Browser back button!</p>
 </body>
 </html>
 
