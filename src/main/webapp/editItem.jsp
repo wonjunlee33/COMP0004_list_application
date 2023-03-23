@@ -1,3 +1,6 @@
+<%@ page import="java.util.*" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
   <title>List Application</title>
@@ -11,11 +14,11 @@
   request.setAttribute("idRequest", idRequest);
   %>
   <form method="POST" action="/runEditItemTwo.html">
+    <input type="hidden" name="idRequest" value="<%=request.getAttribute("idRequest")%>"/>
     <input type="text" name="itemToEdit" value="<%=prevString%>" size="200"/>
     <input type="submit" value="Edit"/>
-  </form>
+  </form>  
 </div>
-<p>Word of advice: If you want to cancel the edit, just press Edit instead of using the Browser back button!</p>
 </body>
 </html>
 

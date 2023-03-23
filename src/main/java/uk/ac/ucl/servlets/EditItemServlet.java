@@ -25,14 +25,13 @@ public class EditItemServlet extends HttpServlet
       // Then add the data to the request object that will be sent to the Java Server Page, so that
       // the JSP can access the data (a Java data structure).
       String idRequest = (String) request.getParameter("editid");
-      request.setAttribute("idRequest", idRequest);
       if (idRequest != null) {
         int id = Integer.parseInt(idRequest);
     
         HashMap<String,String> itemToEdit = model.getSpecificItem(id);
         String itemToEditString = model.deFormatInput(itemToEdit);
         request.setAttribute("itemToEditString", itemToEditString);
-
+        request.setAttribute("idRequest", idRequest);
       }
 
       // Invoke the JSP.

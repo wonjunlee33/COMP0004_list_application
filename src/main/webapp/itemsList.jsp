@@ -16,10 +16,11 @@
       for (HashMap<String,String> item : itemsList)
       {
         String label = item.get("label");
+        String value = item.get("value");
         int currentID = Integer.parseInt(item.get("id"));
         String href = "specificItem.html?id=" + currentID;
     %>
-    <li><a href="<%=href%>"><%=label%></a></li>
+    <li><a href="<%=href%>"><%=label%> / <%=value%></a></li>
     <% } %>
   </ul>
   
