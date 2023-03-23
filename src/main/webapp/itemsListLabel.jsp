@@ -9,7 +9,7 @@
 <body>
 <jsp:include page="/header.jsp"/>
 <div class="main">
-  <h2>Items:</h2>
+  <h2>Labels:</h2>
   <ul>
     <%
       List<String> items = (List<String>) request.getAttribute("listOfItems");

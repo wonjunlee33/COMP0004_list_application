@@ -12,15 +12,15 @@
   <h2>Items:</h2>
   <ul>
     <%
-      List<String> values = (List<String>) request.getAttribute("listOfItems");
-      List<Integer> index = (List<Integer>) request.getAttribute("index");
-      for (int i = 0; i < values.size(); i++)
+      ArrayList<HashMap<String,String>> itemsList = (ArrayList<HashMap<String,String>>) request.getAttribute("listOfItems");
+      for (HashMap<String,String> item : itemsList)
       {
-        String item = values.get(i);
-        int id = index.get(i);
-        String href = "specificItem.html?id=" + id;
+        String label = item.get("label");
+        int currentID = Integer.parseInt(item.get("id"));
+        String value = item.get("value");
+        String href = "specificItem.html?id=" + currentID;
     %>
-    <li><a href="<%=href%>"><%=item%></a></li>
+    <li><a href="<%=href%>"><%=value%></a></li>
     <% } %>
   </ul>
 </div>

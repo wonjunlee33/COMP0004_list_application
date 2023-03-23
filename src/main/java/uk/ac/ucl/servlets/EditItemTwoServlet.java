@@ -23,7 +23,11 @@ public class EditItemTwoServlet extends HttpServlet
 
     // extracting the data from the text box into a hashmap
     String itemToEdit = request.getParameter("itemToEdit");
+    String idRequest = request.getParameter("idRequest");
     HashMap<String,String> newItemHashMap = model.formatInput(itemToEdit);
+
+    // delete previous item
+    model.deleteItem(Integer.parseInt(idRequest));
 
     // append the text box into the json
     model.writeToJsonFile(newItemHashMap);

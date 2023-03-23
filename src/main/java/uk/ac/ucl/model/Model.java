@@ -1,9 +1,7 @@
 package uk.ac.ucl.model;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import java.io.IOException;
 
@@ -25,6 +23,18 @@ public class Model
     return items;
   }
 
+  public int generateID() throws IOException {
+    ArrayList<HashMap<String,String>> itemsList = getItems();
+    Random rand = new Random();
+    int randomNumber = Math.abs(rand.nextInt());
+    for (HashMap<String,String> items : itemsList) {
+      if (items.get("id").compareTo(String.valueOf(randomNumber)) == 0) {
+        randomNumber = Math.abs(rand.nextInt());
+      }
+    }
+    return randomNumber;
+  }
+
   public void readFile(File file)
   {
 
@@ -32,7 +42,12 @@ public class Model
 
   public HashMap<String,String> getSpecificItem(int id) throws IOException {
     ArrayList<HashMap<String,String>> items = getItems();
-    return items.get(id);
+    for (HashMap<String,String> item : items) {
+      if (item.get("id").compareTo(String.valueOf(id)) == 0) {
+        return item;
+      }
+    }
+    return null;
   }
 
   public HashMap<String, String> formatInput(String input) {
@@ -110,8 +125,14 @@ public class Model
       // Load existing JSON data into a list of maps
       List<HashMap<String, String>> existingData = readJsonArray(file);
 
-      // Add new data to the list
-      existingData.remove(id);
+      // remove the old data
+      HashMap<String,String> toDelete = new HashMap<>();
+      for (HashMap<String,String> item : existingData) {
+        if (item.get("id").compareTo(String.valueOf(id)) == 0) {
+          toDelete = item;
+        }
+      }
+      existingData.remove(toDelete);
 
       // Write the updated list to the JSON file
       ObjectMapper objectMapper = new ObjectMapper();

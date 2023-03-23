@@ -25,6 +25,7 @@ public class ViewAddItemServlet extends HttpServlet
     // extracting the data from the text box into a hashmap
     String itemToAdd = request.getParameter("itemToAdd");
     HashMap<String,String> newItemHashMap = model.formatInput(itemToAdd);
+    newItemHashMap.put("id", String.valueOf(model.generateID()));
 
     // append the text box into the json
     model.writeToJsonFile(newItemHashMap);

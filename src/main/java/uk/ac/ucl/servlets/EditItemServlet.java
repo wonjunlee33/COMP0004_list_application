@@ -25,6 +25,7 @@ public class EditItemServlet extends HttpServlet
       // Then add the data to the request object that will be sent to the Java Server Page, so that
       // the JSP can access the data (a Java data structure).
       String idRequest = (String) request.getParameter("editid");
+      request.setAttribute("idRequest", idRequest);
       if (idRequest != null) {
         int id = Integer.parseInt(idRequest);
     
@@ -32,11 +33,8 @@ public class EditItemServlet extends HttpServlet
         String itemToEditString = model.deFormatInput(itemToEdit);
         request.setAttribute("itemToEditString", itemToEditString);
 
-        // delete the previous item
-        model.deleteItem(id);
-
       }
-    
+
       // Invoke the JSP.
       // A JSP page is actually converted into a Java class, so behind the scenes everything is Java.
       ServletContext context = getServletContext();

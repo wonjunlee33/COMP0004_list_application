@@ -26,14 +26,10 @@ public class ViewItemListServlet extends HttpServlet
     // Get the data from the model
     Model model = ModelFactory.getModel();
     ArrayList<HashMap<String,String>> items = model.getItems();
-    List<String> labelNames = new ArrayList<>();
-    for (HashMap<String,String> stuff : items) {
-      labelNames.add(stuff.get("label"));
-    }
 
     // Then add the data to the request object that will be sent to the Java Server Page, so that
     // the JSP can access the data (a Java data structure).
-    request.setAttribute("listOfItems", labelNames);
+    request.setAttribute("listOfItems", items);
 
     // Invoke the JSP.
     // A JSP page is actually converted into a Java class, so behind the scenes everything is Java.

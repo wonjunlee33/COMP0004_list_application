@@ -7,6 +7,8 @@
   <h1>Edit Item</h1>
   <% 
   String prevString = (String) request.getAttribute("itemToEditString");
+  String idRequest = (String) request.getAttribute("idRequest");
+  request.setAttribute("idRequest", idRequest);
   %>
   <form method="POST" action="/runEditItemTwo.html">
     <input type="text" name="itemToEdit" value="<%=prevString%>" size="200"/>

@@ -15,7 +15,13 @@
       String idStr = request.getParameter("id");
       int id = Integer.parseInt(idStr);
       ArrayList<HashMap<String,String>> items = (ArrayList<HashMap<String,String>>) request.getAttribute("listOfItems");
-      HashMap<String,String> itemToDisplay = items.get(id);
+      HashMap<String,String> itemToDisplay = items.get(0);
+      for (HashMap<String,String> it : items) {
+        if (it.get("id").compareTo(idStr) == 0) {
+          itemToDisplay = it;
+          break;
+        }
+      }
       for (Map.Entry<String, String> entry : itemToDisplay.entrySet()) {
         String key = entry.getKey();
         String value = entry.getValue();

@@ -1,4 +1,4 @@
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -12,13 +12,14 @@
   <h2>Items:</h2>
   <ul>
     <%
-      List<String> items = (List<String>) request.getAttribute("listOfItems");
-      for (int i = 0; i < items.size(); i++)
+      ArrayList<HashMap<String,String>> itemsList = (ArrayList<HashMap<String,String>>) request.getAttribute("listOfItems");
+      for (HashMap<String,String> item : itemsList)
       {
-        String item = items.get(i);
-        String href = "specificItem.html?id=" + i;
+        String label = item.get("label");
+        int currentID = Integer.parseInt(item.get("id"));
+        String href = "specificItem.html?id=" + currentID;
     %>
-    <li><a href="<%=href%>"><%=item%></a></li>
+    <li><a href="<%=href%>"><%=label%></a></li>
     <% } %>
   </ul>
   

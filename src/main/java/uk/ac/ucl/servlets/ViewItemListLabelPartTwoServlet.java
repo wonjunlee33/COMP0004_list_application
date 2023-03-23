@@ -26,21 +26,19 @@ public class ViewItemListLabelPartTwoServlet extends HttpServlet
     // Get the data from the model
     Model model = ModelFactory.getModel();
     ArrayList<HashMap<String,String>> items = model.getItems();
-    String labelName = request.getParameter("label");
+    String label = request.getParameter("label");
 
-    List<String> values = new ArrayList<>();
-    List<Integer> index = new ArrayList<>();
-    for (HashMap<String,String> stuff : items) {
-      if (stuff.get("label").compareToIgnoreCase(labelName) == 0) {
-        values.add(stuff.get("value"));
-        index.add(items.indexOf(stuff));
+    // make new arraylist containing only stuff with correct labels
+    ArrayList<HashMap<String,String>> filteredItems = new ArrayList<>();
+    for (HashMap<String,String> item : items) {
+      if (item.get("label").compareToIgnoreCase(label) == 0) {
+        filteredItems.add(item);
       }
     }
 
     // Then add the data to the request object that will be sent to the Java Server Page, so that
     // the JSP can access the data (a Java data structure).
-    request.setAttribute("listOfItems", values);
-    request.setAttribute("index", index);
+    request.setAttribute("listOfItems", filteredItems);
 
     // Invoke the JSP.
     // A JSP page is actually converted into a Java class, so behind the scenes everything is Java.
