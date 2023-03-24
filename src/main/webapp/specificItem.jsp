@@ -32,6 +32,10 @@
           <li><%=key%>: <a href="<%=value%>"><%=value%></a></li>
     <% } else if (key.equalsIgnoreCase("image") || key.equalsIgnoreCase("img")) { %>
           <p><img src="<%=value%>"></p>
+    <% } else if (key.equalsIgnoreCase("item")) { %>
+          <li><%=key%>: <a href="<%=value%>"><%=value%></a></li>
+    <% } else if (key.equalsIgnoreCase("list")) { %>
+          <li><%=key%>: <a href="<%=value%>"><%=value%></a></li>
     <% } else { %>
           <li><%=key%>: <%=value%></li>
     <% } %>

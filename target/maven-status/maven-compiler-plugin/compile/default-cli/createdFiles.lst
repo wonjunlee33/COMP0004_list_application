@@ -7,8 +7,11 @@ uk/ac/ucl/main/Main.class
 uk/ac/ucl/servlets/ViewAddItemServlet.class
 uk/ac/ucl/servlets/DeleteItemServlet.class
 uk/ac/ucl/model/Model.class
+uk/ac/ucl/servlets/EditListServlet.class
 uk/ac/ucl/servlets/EditItemServlet.class
 uk/ac/ucl/model/ModelFactory.class
 uk/ac/ucl/servlets/ViewItemListLabelServlet.class
+uk/ac/ucl/servlets/DeleteListServlet.class
 uk/ac/ucl/servlets/EditItemTwoServlet.class
+uk/ac/ucl/servlets/EditListTwoServlet.class
 uk/ac/ucl/model/Model$1.class

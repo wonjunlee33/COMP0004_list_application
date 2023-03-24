@@ -11,7 +11,6 @@
   <% 
   String prevString = (String) request.getAttribute("itemToEditString");
   String idRequest = (String) request.getAttribute("idRequest");
-  request.setAttribute("idRequest", idRequest);
   %>
   <form method="POST" action="/runEditItemTwo.html">
     <input type="hidden" name="idRequest" value="<%=request.getAttribute("idRequest")%>"/>

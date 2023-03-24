@@ -142,6 +142,29 @@ public class Model
     }
   }
 
+  public ArrayList<Integer> getItemsIDFromLabel(String label) throws IOException {
+    ArrayList<HashMap<String,String>> fullListOfItems = getItems();
+    ArrayList<Integer> itemsID = new ArrayList<>();
+    for (HashMap<String,String> items : fullListOfItems) {
+      if (items.get("label").compareToIgnoreCase(label) == 0) {
+        int itemID = Integer.parseInt(items.get("id"));
+        itemsID.add(itemID);
+      }
+    }
+    return itemsID;
+  }
+
+  public HashMap<String,String> getHashMapFromId(int id) throws IOException {
+    ArrayList<HashMap<String,String>> fullItemsList = getItems();
+    for (HashMap<String,String> items : fullItemsList) {
+      int itemId = Integer.parseInt(items.get("id"));
+      if (itemId == id) {
+        return items;
+      }
+    }
+    return null;
+  }
+
 
   // This also returns dummy data. The real version should use the keyword parameter to search
   // the data and return a list of matching items.
