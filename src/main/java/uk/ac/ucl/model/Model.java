@@ -168,8 +168,27 @@ public class Model
 
   // This also returns dummy data. The real version should use the keyword parameter to search
   // the data and return a list of matching items.
-  public List<String> searchFor(String keyword)
-  {
-    return List.of("Search keyword is: "+ keyword, "result1", "result2", "result3");
+  public ArrayList<HashMap<String,String>> searchFor(String type, String keyword) throws IOException {
+    ArrayList<HashMap<String,String>> fullItemsList = getItems();
+    ArrayList<HashMap<String,String>> itemsToReturn = new ArrayList<>();
+    for (HashMap<String,String> item : fullItemsList) {
+        boolean found = false;
+        for (Map.Entry<String,String> entry : item.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            if ((type.compareToIgnoreCase("everything") == 0 || (type.compareToIgnoreCase("label") == 0 && key.equals("label"))) && value.compareToIgnoreCase(keyword) == 0) {
+                found = true;
+                break;
+            } else if (type.compareToIgnoreCase("values") == 0 && value.compareToIgnoreCase(keyword) == 0) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            itemsToReturn.add(item);
+        }
+    }
+    return itemsToReturn;
   }
+
 }

@@ -1,14 +1,15 @@
 <html>
 <head>
-  <title>Patient Data App</title>
+  <title>List Application</title>
 </head>
 <body>
 <div class="main">
-  <h1>Search</h1>
-  <form method="POST" action="/runsearch.html">
-    <input type="text" name="searchstring" placeholder="Enter search keyword here"/>
-    <input type="submit" value="Search"/>
-  </form>
+  <h1>Search by:</h1>
+  <ul>
+    <li><a href="specificSearch.html?searchby=everything"> Everything</a></li>
+    <li><a href="specificSearch.html?searchby=label"> Label</a></li>
+    <li><a href="specificSearch.html?searchby=values"> Values</a></li>
+  </ul>
 </div>
 </body>
 </html>

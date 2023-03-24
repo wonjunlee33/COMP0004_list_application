@@ -29,13 +29,11 @@
     %>
           <li><%=key%>: <a href="<%=value%>"><%=value%></a></li>
     <% } else if (key.equalsIgnoreCase("item")) { %>
-          <li><%=key%>: <a href="<%=value%>"><%=value%></a></li>
+          <li><%=key%>: <a href="/specificItem.html?id=<%=value%>"><%=value%></a></li>
+    <% } else if (key.equalsIgnoreCase("list")) { %>
+          <li><%=key%>: <a href="/specificItemLabel.html?label=<%=value%>"><%=value%></a></li>
     <% } else if (key.equalsIgnoreCase("image") || key.equalsIgnoreCase("img")) { %>
           <p><img src="<%=value%>"></p>
-    <% } else if (key.equalsIgnoreCase("item")) { %>
-          <li><%=key%>: <a href="<%=value%>"><%=value%></a></li>
-    <% } else if (key.equalsIgnoreCase("list")) { %>
-          <li><%=key%>: <a href="<%=value%>"><%=value%></a></li>
     <% } else { %>
           <li><%=key%>: <%=value%></li>
     <% } %>
@@ -68,8 +66,7 @@
     %>
   <% } %>
 </div>
-<p>Want to reference this item? Just use the following link:</p>
-<p>/specificItem.html?id=<%=id%></p>
+<p>Want to reference this item? Just reference the ID after putting 'item': <%=id%></p>
 <jsp:include page="/footer.jsp"/>
 </body>
 </html>

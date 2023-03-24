@@ -1,4 +1,5 @@
 uk/ac/ucl/servlets/ViewActualItemServlet.class
+uk/ac/ucl/servlets/SearchPartTwoServlet.class
 uk/ac/ucl/servlets/SearchServlet.class
 uk/ac/ucl/servlets/ViewItemListServlet.class
 uk/ac/ucl/model/Model$2.class

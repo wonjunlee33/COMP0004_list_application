@@ -50,8 +50,7 @@
     }
   %>
 <% } %>
-<p>Want to reference this list? Just use the following link:</p>
-<p>/specificItemLabel.html?label=<%=label%></p>
+<p>Want to reference this list? Just use the label name after 'list': <%=label%></p>
 <jsp:include page="/footer.jsp"/>
 </body>
 </html>
