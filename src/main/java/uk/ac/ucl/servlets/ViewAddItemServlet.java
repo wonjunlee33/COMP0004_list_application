@@ -22,10 +22,18 @@ public class ViewAddItemServlet extends HttpServlet
     // Get the data from the model
     Model model = ModelFactory.getModel();
 
+    // get all the necessary data from jsp
+    String numFieldsString = (String) request.getParameter("numFields");
+    int numFields = Integer.parseInt(numFieldsString);
+
     // extracting the data from the text box into a hashmap
-    String itemToAdd = request.getParameter("itemToAdd");
-    HashMap<String,String> newItemHashMap = model.formatInput(itemToAdd);
+    HashMap<String,String> newItemHashMap = new HashMap<>();
     newItemHashMap.put("id", String.valueOf(model.generateID()));
+    newItemHashMap.put("label", request.getParameter("labelParameter"));
+    newItemHashMap.put("value", request.getParameter("valueParameter"));
+    for (int i = 1; i < numFields + 1; ++i) {
+      newItemHashMap.put(request.getParameter("parameterKey" + i), request.getParameter("parameterValue" + i));
+    }
 
     // append the text box into the json
     model.writeToJsonFile(newItemHashMap);
