@@ -29,8 +29,7 @@ public class EditItemServlet extends HttpServlet
         int id = Integer.parseInt(idRequest);
     
         HashMap<String,String> itemToEdit = model.getSpecificItem(id);
-        String itemToEditString = model.deFormatInput(itemToEdit);
-        request.setAttribute("itemToEditString", itemToEditString);
+        request.setAttribute("itemToEdit", itemToEdit);
         request.setAttribute("idRequest", idRequest);
       }
 

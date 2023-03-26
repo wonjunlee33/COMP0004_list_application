@@ -20,6 +20,7 @@ public class EditListTwoServlet extends HttpServlet
   {
     // Get the data from the model
     Model model = ModelFactory.getModel();
+    ArrayList<HashMap<String,String>> fullItemList = model.getItems();
 
     // extracting the data from the text box
     String editedLabel = request.getParameter("editedLabel");
@@ -40,9 +41,26 @@ public class EditListTwoServlet extends HttpServlet
         model.writeToJsonFile(item);
     }
 
-
-
-    // put these new hashmaps into json file and delete the older ones
+    // find every hashmap that has this label referenced and change it to the new one
+    for (HashMap<String,String> item : fullItemList) {
+      HashMap<String,String> selectedItem = item;
+      if (selectedItem.containsKey("list") && selectedItem.containsValue(prevLabel)) {
+        selectedItem.remove("list");
+        selectedItem.put("list", editedLabel);
+        model.deleteItem(Integer.parseInt(item.get("id")));
+        model.writeToJsonFile(selectedItem);
+      } else if (selectedItem.containsKey("List") && selectedItem.containsValue(prevLabel)) {
+        selectedItem.remove("List");
+        selectedItem.put("List", editedLabel);
+        model.deleteItem(Integer.parseInt(item.get("id")));
+        model.writeToJsonFile(selectedItem);
+      } else if (selectedItem.containsKey("LIST") && selectedItem.containsValue(prevLabel)) {
+        selectedItem.remove("LIST");
+        selectedItem.put("LIST", editedLabel);
+        model.deleteItem(Integer.parseInt(item.get("id")));
+        model.writeToJsonFile(selectedItem);
+      } else continue;
+    }
 
     // Invoke the JSP.
     // A JSP page is actually converted into a Java class, so behind the scenes everything is Java.
