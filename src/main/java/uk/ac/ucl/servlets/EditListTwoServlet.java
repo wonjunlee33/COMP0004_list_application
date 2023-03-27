@@ -41,26 +41,29 @@ public class EditListTwoServlet extends HttpServlet
         model.writeToJsonFile(item);
     }
 
-    // find every hashmap that has this label referenced and change it to the new one
+    List<HashMap<String,String>> itemsToDelete = new ArrayList<>();
+
     for (HashMap<String,String> item : fullItemList) {
-      HashMap<String,String> selectedItem = item;
-      if (selectedItem.containsKey("list") && selectedItem.containsValue(prevLabel)) {
-        selectedItem.remove("list");
-        selectedItem.put("list", editedLabel);
-        model.deleteItem(Integer.parseInt(item.get("id")));
-        model.writeToJsonFile(selectedItem);
-      } else if (selectedItem.containsKey("List") && selectedItem.containsValue(prevLabel)) {
-        selectedItem.remove("List");
-        selectedItem.put("List", editedLabel);
-        model.deleteItem(Integer.parseInt(item.get("id")));
-        model.writeToJsonFile(selectedItem);
-      } else if (selectedItem.containsKey("LIST") && selectedItem.containsValue(prevLabel)) {
-        selectedItem.remove("LIST");
-        selectedItem.put("LIST", editedLabel);
-        model.deleteItem(Integer.parseInt(item.get("id")));
-        model.writeToJsonFile(selectedItem);
-      } else continue;
+      if (item.containsKey("list") && item.containsValue(prevLabel)) {
+        item.remove("list");
+        item.put("list", editedLabel);
+        itemsToDelete.add(item);
+      } else if (item.containsKey("List") && item.containsValue(prevLabel)) {
+        item.remove("List");
+        item.put("List", editedLabel);
+        itemsToDelete.add(item);
+      } else if (item.containsKey("LIST") && item.containsValue(prevLabel)) {
+        item.remove("LIST");
+        item.put("LIST", editedLabel);
+        itemsToDelete.add(item);
+      }
     }
+    
+    for (HashMap<String,String> item : itemsToDelete) {
+        model.deleteItem(Integer.parseInt(item.get("id")));
+        model.writeToJsonFile(item);
+    }
+    
 
     // Invoke the JSP.
     // A JSP page is actually converted into a Java class, so behind the scenes everything is Java.

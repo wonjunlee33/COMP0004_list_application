@@ -7,7 +7,6 @@ uk/ac/ucl/servlets/ViewItemListLabelPartTwoServlet.class
 uk/ac/ucl/main/Main.class
 uk/ac/ucl/servlets/ViewAddItemServlet.class
 uk/ac/ucl/servlets/DeleteItemServlet.class
-uk/ac/ucl/servlets/EditItemThreeServlet.class
 uk/ac/ucl/model/Model.class
 uk/ac/ucl/servlets/EditListServlet.class
 uk/ac/ucl/servlets/EditItemServlet.class
