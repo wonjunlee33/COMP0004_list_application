@@ -30,7 +30,6 @@ public class EditItemServlet extends HttpServlet
     
         HashMap<String,String> itemToEdit = model.getSpecificItem(id);
         request.setAttribute("itemToEdit", itemToEdit);
-        request.setAttribute("idRequest", idRequest);
       }
 
       // Invoke the JSP.

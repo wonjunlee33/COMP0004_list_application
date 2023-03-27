@@ -14,13 +14,10 @@ public class Model
 {
   // The example code in this class should be replaced by your Model class code.
   // The data should be stored in a suitable data structure.
+  ArrayList<HashMap<String,String>> list = new ArrayList<>();
 
   public ArrayList<HashMap<String, String>> getItems() throws IOException {
-    ObjectMapper mapper = new ObjectMapper();
-    File file = new File("src/main/java/uk/ac/ucl/storage/items.json");
-    TypeReference<ArrayList<HashMap<String, String>>> typeRef = new TypeReference<ArrayList<HashMap<String, String>>>() {};
-    ArrayList<HashMap<String, String>> items = mapper.readValue(file, typeRef);
-    return items;
+    return this.list;
   }
 
   public int generateID() throws IOException {
@@ -35,8 +32,11 @@ public class Model
     return randomNumber;
   }
 
-  public void readFile(File file)
+  public void readFile(File file) throws IOException
   {
+    ObjectMapper mapper = new ObjectMapper();
+    TypeReference<ArrayList<HashMap<String, String>>> typeRef = new TypeReference<ArrayList<HashMap<String, String>>>() {};
+    this.list = mapper.readValue(file, typeRef);
 
   }
 
@@ -87,14 +87,12 @@ public class Model
         File file = new File("src/main/java/uk/ac/ucl/storage/items.json");
 
         // Load existing JSON data into a list of maps
-        List<HashMap<String, String>> existingData = readJsonArray(file);
 
-        // Add new data to the list
-        existingData.add(newItem);
+        this.list.add(newItem);
 
         // Write the updated list to the JSON file
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writeValue(file, existingData);
+        objectMapper.writeValue(file, this.list);
     } catch (IOException e) {
         e.printStackTrace();
     }
@@ -123,29 +121,27 @@ public class Model
       File file = new File("src/main/java/uk/ac/ucl/storage/items.json");
 
       // Load existing JSON data into a list of maps
-      List<HashMap<String, String>> existingData = readJsonArray(file);
 
       // remove the old data
       HashMap<String,String> toDelete = new HashMap<>();
-      for (HashMap<String,String> item : existingData) {
+      for (HashMap<String,String> item : this.list) {
         if (item.get("id").compareTo(String.valueOf(id)) == 0) {
           toDelete = item;
         }
       }
-      existingData.remove(toDelete);
+      this.list.remove(toDelete);
 
       // Write the updated list to the JSON file
       ObjectMapper objectMapper = new ObjectMapper();
-      objectMapper.writeValue(file, existingData);
+      objectMapper.writeValue(file, this.list);
     } catch (IOException e) {
         e.printStackTrace();
     }
   }
 
   public ArrayList<Integer> getItemsIDFromLabel(String label) throws IOException {
-    ArrayList<HashMap<String,String>> fullListOfItems = getItems();
     ArrayList<Integer> itemsID = new ArrayList<>();
-    for (HashMap<String,String> items : fullListOfItems) {
+    for (HashMap<String,String> items : this.list) {
       if (items.get("label").compareToIgnoreCase(label) == 0) {
         int itemID = Integer.parseInt(items.get("id"));
         itemsID.add(itemID);
@@ -155,8 +151,7 @@ public class Model
   }
 
   public HashMap<String,String> getHashMapFromId(int id) throws IOException {
-    ArrayList<HashMap<String,String>> fullItemsList = getItems();
-    for (HashMap<String,String> items : fullItemsList) {
+    for (HashMap<String,String> items : this.list) {
       int itemId = Integer.parseInt(items.get("id"));
       if (itemId == id) {
         return items;

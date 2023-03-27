@@ -21,7 +21,7 @@ public class ModelFactory
       // Note where the data file is stored in the data directory,
       // and the pathname to locate it. The data here is just some example data,
       // you replace it with your data file(s)
-      model.readFile(new File("./data/patients.csv"));
+      model.readFile(new File("src/main/java/uk/ac/ucl/storage/items.json"));
     }
     return model;
   }

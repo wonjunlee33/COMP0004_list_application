@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/runEditList.html")
+@WebServlet("/runEditList.html/*")
 public class EditListServlet extends HttpServlet
 {
 
@@ -28,11 +28,16 @@ public class EditListServlet extends HttpServlet
         request.setAttribute("prevLabel", labelRequest);
       }
 
+      String numFields = request.getParameter("numFields");
+      if (numFields != null) {
+        request.setAttribute("numFields", numFields);
+      }
+
       // Invoke the JSP.
       // A JSP page is actually converted into a Java class, so behind the scenes everything is Java.
       ServletContext context = getServletContext();
       RequestDispatcher dispatch = context.getRequestDispatcher("/editList.jsp");
       dispatch.forward(request, response);
     }
-
+    
 }
