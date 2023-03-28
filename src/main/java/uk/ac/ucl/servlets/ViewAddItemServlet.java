@@ -32,7 +32,9 @@ public class ViewAddItemServlet extends HttpServlet
     newItemHashMap.put("label", request.getParameter("labelParameter"));
     newItemHashMap.put("value", request.getParameter("valueParameter"));
     for (int i = 1; i < numFields + 1; ++i) {
-      newItemHashMap.put(request.getParameter("parameterKey" + i), request.getParameter("parameterValue" + i));
+      if ((request.getParameter("parameterKey" + i) != null && (request.getParameter("parameterValue" + i)) != null) || ((request.getParameter("parameterKey" + i)).compareToIgnoreCase("label") != 0 && (request.getParameter("parameterValue" + i)).compareToIgnoreCase("value") != 0)) {
+        newItemHashMap.put(request.getParameter("parameterKey" + i), request.getParameter("parameterValue" + i));
+      }
     }
 
     // append the text box into the json
@@ -45,4 +47,3 @@ public class ViewAddItemServlet extends HttpServlet
     dispatch.forward(request, response);
   }
 }
-

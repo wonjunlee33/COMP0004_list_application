@@ -1,12 +1,12 @@
 <%@ page language="java" %>
 <%@ page import="java.util.*" %>
 
+
 <html>
 <head>
   <title>List Application</title>
 </head>
 <body>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
 <div class="main">
   <h1>Add Item</h1>
   <%int numFields = 0; // the initial number of lists to display%>
