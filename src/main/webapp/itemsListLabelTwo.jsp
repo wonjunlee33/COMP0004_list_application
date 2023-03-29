@@ -27,7 +27,7 @@
 </div>
 <form method="post" action="/runEditList.html">
   <input type="hidden" name="editLabel" value="<%= label %>">
-  <button type="submit">Edit</button>
+  <button type="submit" class="btn">Edit</button>
 </form>  
 <% if (request.getParameter("editList") != null) { %>
   <%
@@ -40,7 +40,7 @@
 <% } %>
 <form method="post" action="/runDeleteList.html">
   <input type="hidden" name="deleteLabel" value="<%= label %>">
-  <button type="submit">Delete</button>
+  <button type="submit" class="btn">Delete</button>
 </form>  
 <% if (request.getParameter("deleteList") != null) { %>
   <%

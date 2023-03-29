@@ -75,7 +75,7 @@
         </ul>
         <form method="post" action="/runEditItem.html">
             <input type="hidden" name="editid" value="<%= id %>">
-            <button type="submit">Edit</button>
+            <button class="btn" type="submit">Edit</button>
         </form>  
         <% if (request.getParameter("editItem") != null) { %>
             <%
@@ -88,7 +88,7 @@
         <% } %>
         <form method="post" action="/runDeleteItem.html">
             <input type="hidden" name="deleteid" value="<%= id %>">
-            <button type="submit">Delete</button>
+            <button class="btn" type="submit">Delete</button>
         </form>  
         <% if (request.getParameter("deleteItem") != null) { %>
           <%

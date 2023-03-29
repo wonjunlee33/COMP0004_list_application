@@ -5,6 +5,7 @@
 <html>
 <head>
   <title>List Application</title>
+  <jsp:include page="/meta.jsp"/>
 </head>
 <body>
 <div class="main">
@@ -15,7 +16,7 @@
   <form method="POST" action="/runEditListTwo.html">
     <input type="hidden" name="prevLabel" value="<%=request.getAttribute("prevLabel")%>"/>
     <input type="text" name="editedLabel" value="<%=prevLabel%>" size="200"/>
-    <input type="submit" value="Edit"/>
+    <input type="submit" class="btn" value="Edit"/>
   </form>  
 </div>
 </body>

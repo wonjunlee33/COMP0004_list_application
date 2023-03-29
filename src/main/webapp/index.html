@@ -1,31 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <jsp:include page="/meta.jsp"/>
   <meta charset="UTF-8">
   <title>Items Data</title>
 </head>
-<body>
-<h2>Welcome to the List Application!</h2>
+<h2>== General List Application ==</h2>
+  <style>
+    h2 {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+  </style>
 
-<div class="card" style="width: 18rem;">
+<div class="card">
   <div class="card-body">
     <a href="itemsList.html">View the Full Items List</a>
   </div>
 </div>
-<div class="card" style="width: 18rem;">
+<div class="card">
   <div class="card-body">
     <a href="itemsListLabel.html">View Items by Labels</a>
   </div>
 </div>
-<div class="card" style="width: 18rem;">
+<div class="card">
   <div class="card-body">
     <a href="addItem.jsp">Add Item</a>
   </div>
 </div>
-<div class="card" style="width: 18rem;">
+<div class="card">
   <div class="card-body">
     <a href="search.html">Search</a>
   </div>
 </div>
+<style>
+  .card {
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    margin: 0 auto 10px auto;
+    background-color: #fff;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    width: 300px;
+    text-align: center;
+  }
+</style>
 </body>
 </html>

@@ -5,6 +5,7 @@
 
 <html>
 <head>
+  <jsp:include page="/meta.jsp" />
   <title>List Application</title>
 </head>
 <body>
@@ -31,12 +32,12 @@
   
     <p></p>
     <input type="hidden" name="numFields" value="<%=numFields%>"/>
-    <input type="submit" value="Add"/>
+    <input type="submit" class="btn" value="Add"/>
   </form>
   
   <form method="POST" action="/addItem.jsp">
     <input type="hidden" name="numFields" value="<%=numFields+1%>"/>
-    <input type="submit" value="Add more information..."/>
+    <input type="submit" class="btn" value="Add more information..."/>
   </form>
 
   <%
@@ -44,7 +45,7 @@
   %>
   <form method="POST" action="/addItem.jsp">
     <input type="hidden" name="numFields" value="<%=numFields-1%>"/>
-    <input type="submit" value="Delete last field..."/>
+    <input type="submit" class="btn" value="Delete last field..."/>
   </form>
 <% } %>
 </div>

@@ -31,12 +31,11 @@ public class ViewAddItemServlet extends HttpServlet
     // extracting the data from the text box into a hashmap
     Item newItemHashMap = new Item(model.generateID(), request.getParameter("labelParameter"), request.getParameter("valueParameter"), new HashMap<>());
     for (int i = 1; i < numFields + 1; ++i) {
-      if ((request.getParameter("parameterKey" + i) != null && (request.getParameter("parameterValue" + i)) != null) || ((request.getParameter("parameterKey" + i)).compareToIgnoreCase("label") != 0 && (request.getParameter("parameterValue" + i)).compareToIgnoreCase("value") != 0)) {
+      if ((request.getParameter("parameterKey" + i) != null && !request.getParameter("parameterKey" + i).isEmpty()) && (request.getParameter("parameterValue" + i) != null && !request.getParameter("parameterValue" + i).isEmpty())) {
         newItemHashMap.addItem(request.getParameter("parameterKey" + i), request.getParameter("parameterValue" + i));
       }
     }
 
-    System.out.println(newItemHashMap.getOtherParameters());
     // append the text box into the json
     model.writeJsonArray(newItemHashMap);
 

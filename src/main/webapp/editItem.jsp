@@ -5,6 +5,7 @@
 <html>
 <head>
   <title>List Application</title>
+  <jsp:include page="/meta.jsp"/>
 </head>
 <body>
 <div class="main">
