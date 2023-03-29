@@ -2,6 +2,7 @@ package uk.ac.ucl.servlets;
 
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
+import uk.ac.ucl.datastruct.Item;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.*;
 
 @WebServlet("/runEditItem.html")
 public class EditItemServlet extends HttpServlet
@@ -28,9 +28,10 @@ public class EditItemServlet extends HttpServlet
       if (idRequest != null) {
         int id = Integer.parseInt(idRequest);
     
-        HashMap<String,String> itemToEdit = model.getSpecificItem(id);
+        Item itemToEdit = model.getSpecificItem(id);
         request.setAttribute("itemToEdit", itemToEdit);
       }
+
 
       // Invoke the JSP.
       // A JSP page is actually converted into a Java class, so behind the scenes everything is Java.

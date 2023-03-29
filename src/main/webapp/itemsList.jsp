@@ -1,5 +1,6 @@
 <%@ page import="java.util.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="uk.ac.ucl.datastruct.Item" %>
 
 <html>
 <head>
@@ -12,12 +13,12 @@
   <h2>Items:</h2>
   <ul>
     <%
-      ArrayList<HashMap<String,String>> itemsList = (ArrayList<HashMap<String,String>>) request.getAttribute("listOfItems");
-      for (HashMap<String,String> item : itemsList)
+      ArrayList<Item> itemsList = (ArrayList<Item>) request.getAttribute("listOfItems");
+      for (Item item : itemsList)
       {
-        String label = item.get("label");
-        String value = item.get("value");
-        int currentID = Integer.parseInt(item.get("id"));
+        String label = item.getLabel();
+        String value = item.getProperty();
+        int currentID = item.getId();
         String href = "specificItem.html?id=" + currentID;
     %>
     <li><a href="<%=href%>"><%=label%> / <%=value%></a></li>

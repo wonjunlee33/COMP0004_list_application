@@ -1,5 +1,6 @@
 <%@ page import="java.util.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="uk.ac.ucl.datastruct.Item" %>
 
 <html>
 <head>
@@ -12,12 +13,12 @@
   <h2>Items:</h2>
   <ul>
     <%
-      ArrayList<HashMap<String,String>> itemsList = (ArrayList<HashMap<String,String>>) request.getAttribute("listOfItems");
-      String label = (itemsList.get(0)).get("label");
-      for (HashMap<String,String> item : itemsList)
+      ArrayList<Item> itemsList = (ArrayList<Item>) request.getAttribute("listOfItems");
+      String label = (itemsList.get(0)).getLabel();
+      for (Item item : itemsList)
       {
-        int currentID = Integer.parseInt(item.get("id"));
-        String value = item.get("value");
+        int currentID = item.getId();
+        String value = item.getProperty();
         String href = "specificItem.html?id=" + currentID;
     %>
     <li><a href="<%=href%>"><%=value%></a></li>
@@ -33,7 +34,7 @@
     String editLabel = request.getParameter("editLabel");
     if(editLabel != null && !editLabel.isEmpty()) {
       request.setAttribute("editLabel", editLabel);
-      // edit the item from the model
+      // edit the item
     }
   %>
 <% } %>

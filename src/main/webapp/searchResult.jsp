@@ -1,5 +1,6 @@
 <%@ page import="java.util.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="uk.ac.ucl.datastruct.Item" %>
 
 <html>
 <head>
@@ -12,20 +13,20 @@
     <div class="main">
         <h1>Search Result</h1>
         <% 
-        ArrayList<HashMap<String,String>> items = (ArrayList<HashMap<String,String>>) request.getAttribute("listOfMatchingItems");
+        ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("listOfMatchingItems");
         if (items.size() != 0) { %>
             <ul>
-            <% for (HashMap<String,String> item : items) { 
-                String label = item.get("label");
-                String value = item.get("value");
-                int currentID = Integer.parseInt(item.get("id"));
+            <% for (Item item : items) { 
+                String label = item.getLabel();
+                String value = item.getProperty();
+                int currentID = item.getId();
                 String href = "specificItem.html?id=" + currentID;
             %>
                 <li><a href="<%=href%>"><%=label%> / <%=value%></a></li>
             <% } %>
             </ul>
         <% } else { %>
-            <p>Nothing found</p>
+            <p>Nothing found! Please try again.</p>
         <% } %>
     </div>
     <jsp:include page="/footer.jsp"/>

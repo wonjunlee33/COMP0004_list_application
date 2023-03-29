@@ -2,6 +2,7 @@ package uk.ac.ucl.servlets;
 
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
+import uk.ac.ucl.datastruct.Item;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -25,11 +26,11 @@ public class ViewItemListLabelServlet extends HttpServlet
   {
     // Get the data from the model
     Model model = ModelFactory.getModel();
-    ArrayList<HashMap<String,String>> items = model.getItems();
+    ArrayList<Item> items = model.getItems();
     List<String> labelNames = new ArrayList<String>();
-    for (HashMap<String,String> stuff : items) {
-      if (!(labelNames.contains(stuff.get("label")))) {
-        labelNames.add(stuff.get("label"));
+    for (Item stuff : items) {
+      if (!(labelNames.contains(stuff.getLabel()))) {
+        labelNames.add(stuff.getLabel());
       }
     }
 

@@ -2,6 +2,7 @@ package uk.ac.ucl.servlets;
 
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
+import uk.ac.ucl.datastruct.Item;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -20,7 +21,7 @@ public class EditListTwoServlet extends HttpServlet
   {
     // Get the data from the model
     Model model = ModelFactory.getModel();
-    ArrayList<HashMap<String,String>> fullItemList = model.getItems();
+    ArrayList<Item> fullItemList = model.getItems();
 
     // extracting the data from the text box
     String editedLabel = request.getParameter("editedLabel");
@@ -28,40 +29,39 @@ public class EditListTwoServlet extends HttpServlet
 
     // change the hashmaps accordingly
     ArrayList<Integer> idToEdit = model.getItemsIDFromLabel(prevLabel);
-    ArrayList<HashMap<String,String>> itemsToEdit = new ArrayList<>();
+    ArrayList<Item> itemsToEdit = new ArrayList<>();
     for (int id : idToEdit) {
-        itemsToEdit.add(model.getHashMapFromId(id));
+        itemsToEdit.add(model.getItemFromId(id));
         model.deleteItem(id);
     }
 
     // iterate through the itemsToEdit and change the value of key "label"
-    for (HashMap<String,String> item : itemsToEdit) {
-        item.remove("label");
-        item.put("label", editedLabel);
-        model.writeToJsonFile(item);
+    for (Item item : itemsToEdit) {
+        item.editLabel(editedLabel);
+        model.writeJsonArray(item);
     }
 
-    List<HashMap<String,String>> itemsToDelete = new ArrayList<>();
+    List<Item> itemsToDelete = new ArrayList<>();
 
-    for (HashMap<String,String> item : fullItemList) {
-      if (item.containsKey("list") && item.containsValue(prevLabel)) {
-        item.remove("list");
-        item.put("list", editedLabel);
+    for (Item item : fullItemList) {
+      if (item.otherParametersContainsKey("list") && item.otherParametersContainsValue(prevLabel)) {
+        item.removeOtherParameter("list");
+        item.addItem("list", editedLabel);
         itemsToDelete.add(item);
-      } else if (item.containsKey("List") && item.containsValue(prevLabel)) {
-        item.remove("List");
-        item.put("List", editedLabel);
+      } else if (item.otherParametersContainsKey("List") && item.otherParametersContainsValue(prevLabel)) {
+        item.removeOtherParameter("List");
+        item.addItem("List", editedLabel);
         itemsToDelete.add(item);
-      } else if (item.containsKey("LIST") && item.containsValue(prevLabel)) {
-        item.remove("LIST");
-        item.put("LIST", editedLabel);
+      } else if (item.otherParametersContainsKey("LIST") && item.otherParametersContainsValue(prevLabel)) {
+        item.removeOtherParameter("LIST");
+        item.addItem("LIST", editedLabel);
         itemsToDelete.add(item);
       }
     }
     
-    for (HashMap<String,String> item : itemsToDelete) {
-        model.deleteItem(Integer.parseInt(item.get("id")));
-        model.writeToJsonFile(item);
+    for (Item item : itemsToDelete) {
+        model.deleteItem(item.getId());
+        model.writeJsonArray(item);
     }
     
 

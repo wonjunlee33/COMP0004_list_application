@@ -2,6 +2,7 @@ package uk.ac.ucl.model;
 
 import java.io.File;
 import java.util.*;
+import uk.ac.ucl.datastruct.Item;
 
 import java.io.IOException;
 
@@ -14,18 +15,18 @@ public class Model
 {
   // The example code in this class should be replaced by your Model class code.
   // The data should be stored in a suitable data structure.
-  ArrayList<HashMap<String,String>> list = new ArrayList<>();
+  ArrayList<Item> list = new ArrayList<>();
 
-  public ArrayList<HashMap<String, String>> getItems() throws IOException {
+  public ArrayList<Item> getItems() throws IOException {
     return this.list;
   }
 
   public int generateID() throws IOException {
-    ArrayList<HashMap<String,String>> itemsList = getItems();
+    ArrayList<Item> itemsList = getItems();
     Random rand = new Random();
     int randomNumber = Math.abs(rand.nextInt());
-    for (HashMap<String,String> items : itemsList) {
-      if (items.get("id").compareTo(String.valueOf(randomNumber)) == 0) {
+    for (Item items : itemsList) {
+      if (items.getId() == randomNumber) {
         randomNumber = Math.abs(rand.nextInt());
       }
     }
@@ -35,61 +36,46 @@ public class Model
   public void readFile(File file) throws IOException
   {
     ObjectMapper mapper = new ObjectMapper();
-    TypeReference<ArrayList<HashMap<String, String>>> typeRef = new TypeReference<ArrayList<HashMap<String, String>>>() {};
+    TypeReference<ArrayList<Item>> typeRef = new TypeReference<ArrayList<Item>>() {};
     this.list = mapper.readValue(file, typeRef);
 
   }
 
-  public HashMap<String,String> getSpecificItem(int id) throws IOException {
-    ArrayList<HashMap<String,String>> items = getItems();
-    for (HashMap<String,String> item : items) {
-      if (item.get("id").compareTo(String.valueOf(id)) == 0) {
+  public Item getSpecificItem(int id) throws IOException {
+    ArrayList<Item> items = getItems();
+    for (Item item : items) {
+      if (item.getId() == id) {
         return item;
       }
     }
     return null;
   }
 
-  public HashMap<String, String> formatInput(String input) {
-    HashMap<String, String> result = new HashMap<>();
-
-    String[] keyValuePairs = input.split("\\|");
-    if (keyValuePairs.length % 2 != 0) {
-        throw new IllegalArgumentException("Input string has an odd number of elements.");
+  public List<Item> readJsonArray(File file) {
+    List<Item> result = new ArrayList<>();
+    try {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode rootNode = objectMapper.readTree(file);
+        if (rootNode.isArray()) {
+            for (JsonNode node : rootNode) {
+                Item item = objectMapper.treeToValue(node, Item.class);
+                System.out.println(Item.class);
+                result.add(item);
+            }
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
     }
-
-    for (int i = 0; i < keyValuePairs.length; i += 2) {
-        String key = keyValuePairs[i];
-        String value = keyValuePairs[i+1];
-        result.put(key, value);
-    }
-
     return result;
   }
 
-  public String deFormatInput(HashMap<String,String> item) {
-    StringBuilder sb = new StringBuilder();
-    for (HashMap.Entry<String, String> entry : item.entrySet()) {
-        sb.append(entry.getKey()).append("|").append(entry.getValue()).append("|");
-    }
-    
-    // get rid of last slash
-    String result = sb.toString();
-    if (result.endsWith("|")) {
-        result = result.substring(0, result.length() - 1);
-    }
-    
-    return result;
-}
-
-  public void writeToJsonFile(HashMap<String, String> newItem) {
-    try {
+  public void writeJsonArray(Item item) {
+      try {
         File file = new File("src/main/java/uk/ac/ucl/storage/items.json");
 
         // Load existing JSON data into a list of maps
 
-        this.list.add(newItem);
-
+        this.list.add(item);
         // Write the updated list to the JSON file
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.writeValue(file, this.list);
@@ -98,38 +84,17 @@ public class Model
     }
   }
 
-  public List<HashMap<String, String>> readJsonArray(File file) {
-      List<HashMap<String, String>> result = new ArrayList<>();
-      try {
-          ObjectMapper objectMapper = new ObjectMapper();
-          JsonNode rootNode = objectMapper.readTree(file);
-          if (rootNode.isArray()) {
-              for (JsonNode node : rootNode) {
-                  TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {};
-                  HashMap<String, String> map = objectMapper.convertValue(node, typeRef);
-                  result.add(map);
-              }
-          }
-      } catch (IOException e) {
-          e.printStackTrace();
-      }
-      return result;
-  }
-
   public void deleteItem(int id) {
     try {
       File file = new File("src/main/java/uk/ac/ucl/storage/items.json");
 
-      // Load existing JSON data into a list of maps
-
       // remove the old data
-      HashMap<String,String> toDelete = new HashMap<>();
-      for (HashMap<String,String> item : this.list) {
-        if (item.get("id").compareTo(String.valueOf(id)) == 0) {
-          toDelete = item;
+      for (Item item : this.list) {
+        if (item.getId() == id) {
+          this.list.remove(item);
+          break;
         }
       }
-      this.list.remove(toDelete);
 
       // Write the updated list to the JSON file
       ObjectMapper objectMapper = new ObjectMapper();
@@ -141,18 +106,18 @@ public class Model
 
   public ArrayList<Integer> getItemsIDFromLabel(String label) throws IOException {
     ArrayList<Integer> itemsID = new ArrayList<>();
-    for (HashMap<String,String> items : this.list) {
-      if (items.get("label").compareToIgnoreCase(label) == 0) {
-        int itemID = Integer.parseInt(items.get("id"));
+    for (Item items : this.list) {
+      if (items.getLabel().compareToIgnoreCase(label) == 0) {
+        int itemID = items.getId();
         itemsID.add(itemID);
       }
     }
     return itemsID;
   }
 
-  public HashMap<String,String> getHashMapFromId(int id) throws IOException {
-    for (HashMap<String,String> items : this.list) {
-      int itemId = Integer.parseInt(items.get("id"));
+  public Item getItemFromId(int id) throws IOException {
+    for (Item items : this.list) {
+      int itemId = items.getId();
       if (itemId == id) {
         return items;
       }
@@ -163,27 +128,32 @@ public class Model
 
   // This also returns dummy data. The real version should use the keyword parameter to search
   // the data and return a list of matching items.
-  public ArrayList<HashMap<String,String>> searchFor(String type, String keyword) throws IOException {
-    ArrayList<HashMap<String,String>> fullItemsList = getItems();
-    ArrayList<HashMap<String,String>> itemsToReturn = new ArrayList<>();
-    for (HashMap<String,String> item : fullItemsList) {
+  public ArrayList<Item> searchFor(String type, String keyword) throws IOException {
+    ArrayList<Item> fullItemsList = getItems();
+    ArrayList<Item> itemsToReturn = new ArrayList<>();
+    for (Item item : fullItemsList) {
         boolean found = false;
-        for (Map.Entry<String,String> entry : item.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            if ((type.compareToIgnoreCase("everything") == 0 || (type.compareToIgnoreCase("label") == 0 && key.equals("label"))) && value.compareToIgnoreCase(keyword) == 0) {
-                found = true;
-                break;
-            } else if (type.compareToIgnoreCase("values") == 0 && value.compareToIgnoreCase(keyword) == 0) {
-                found = true;
-                break;
+        ArrayList<String> keywords = item.generateKeyWords();
+        ArrayList<String> valueKeywords = item.generateKeyWordsWithoutLabels();
+        if (type.compareTo("everything") == 0) {
+          if (keywords.contains(keyword)) {
+            found = true;
+          }
+        } else if (type.compareTo("label") == 0) {
+            if (item.getLabel().compareToIgnoreCase(keyword) == 0) {
+              found = true;
+            }
+        } else if (type.compareTo("values") == 0) {
+            if (valueKeywords.contains(keyword)) {
+              found = true;
             }
         }
+
         if (found) {
             itemsToReturn.add(item);
         }
+      }
+      return itemsToReturn;
     }
-    return itemsToReturn;
-  }
 
 }

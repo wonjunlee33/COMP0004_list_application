@@ -1,5 +1,6 @@
 <%@ page import="java.util.*"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="uk.ac.ucl.datastruct.Item" %>
 
 <html>
 <head>
@@ -10,23 +11,22 @@
   <h1>Edit Item</h1>
   <!--get the stuff from EditItemServlet-->
   <%
-  HashMap<String,String> itemToEdit = (HashMap<String,String>) request.getAttribute("itemToEdit");
-  String idRequest = itemToEdit.get("id");
-  int numFields = itemToEdit.size() - 3; // the initial number of lists to display
+  Item itemToEdit = (Item) request.getAttribute("itemToEdit");
+  int idRequest = itemToEdit.getId();
+  int numFields = itemToEdit.getOtherParameters().size(); // the initial number of lists to display
   int i = 0;
-
   %>
   
   <form method="POST" action="/runEditItemTwo.html">
     <input type="text" name="label" placeholder="Enter label..." size="50" value="label" required/>
-    <input type="text" name="labelParameter" placeholder="Enter label parameter..." size="50" value="<%=itemToEdit.get("label")%>" required/>
+    <input type="text" name="labelParameter" placeholder="Enter label parameter..." size="50" value="<%=itemToEdit.getLabel()%>" required/>
     <br>
     <input type="text" name="value" placeholder="Enter value..." size="50" value="value" required/>
-    <input type="text" name="valueParameter" placeholder="Enter value parameter..." size="50" value="<%=itemToEdit.get("value")%>" required/>
+    <input type="text" name="valueParameter" placeholder="Enter value parameter..." size="50" value="<%=itemToEdit.getProperty()%>" required/>
     <br>
     <%
     String key, value;
-    for(Map.Entry<String,String> entry : itemToEdit.entrySet()) { 
+    for(Map.Entry<String,String> entry : itemToEdit.getOtherParameters().entrySet()) { 
         key = entry.getKey();
         value = entry.getValue();
         if (key == "label" || key == "value" || key == "id") {
@@ -54,7 +54,6 @@
 </div>
 
 <p>Remember: All items must have a label and value parameter!</p>
-<p>Also: (for now) please make sure to pre load in the number of fields required!</p>
 <jsp:include page="/footer.jsp"/>
 </body>
 </html>

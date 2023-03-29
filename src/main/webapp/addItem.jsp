@@ -1,5 +1,6 @@
 <%@ page language="java" %>
 <%@ page import="java.util.*" %>
+<%@ page import="uk.ac.ucl.datastruct.Item" %>
 
 
 <html>
@@ -32,7 +33,6 @@
     <input type="hidden" name="numFields" value="<%=numFields%>"/>
     <input type="submit" value="Add"/>
   </form>
-
   
   <form method="POST" action="/addItem.jsp">
     <input type="hidden" name="numFields" value="<%=numFields+1%>"/>
@@ -50,7 +50,7 @@
 </div>
 
 <p>Remember: All items must have a label and value parameter!</p>
-<p>Also: (for now) please make sure to pre load in the number of fields required!</p>
+<p>Also, please make sure to pre-load in the number of fields required!</p>
 <jsp:include page="/footer.jsp"/>
 </body>
 </html>

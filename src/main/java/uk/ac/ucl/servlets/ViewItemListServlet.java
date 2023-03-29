@@ -2,6 +2,7 @@ package uk.ac.ucl.servlets;
 
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
+import uk.ac.ucl.datastruct.Item;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -25,7 +26,7 @@ public class ViewItemListServlet extends HttpServlet
   {
     // Get the data from the model
     Model model = ModelFactory.getModel();
-    ArrayList<HashMap<String,String>> items = model.getItems();
+    ArrayList<Item> items = model.getItems();
 
     // Then add the data to the request object that will be sent to the Java Server Page, so that
     // the JSP can access the data (a Java data structure).

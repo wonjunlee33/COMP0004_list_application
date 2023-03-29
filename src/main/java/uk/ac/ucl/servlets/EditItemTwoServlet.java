@@ -2,6 +2,7 @@ package uk.ac.ucl.servlets;
 
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
+import uk.ac.ucl.datastruct.Item;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
 
 @WebServlet("/runEditItemTwo.html")
 public class EditItemTwoServlet extends HttpServlet
@@ -28,15 +29,12 @@ public class EditItemTwoServlet extends HttpServlet
     int idRequest = Integer.parseInt(idRequestString);
 
     // start creating new hashmap
-    HashMap<String,String> newItemHashMap = new HashMap<>();
-    newItemHashMap.put("label", request.getParameter("labelParameter"));
-    newItemHashMap.put("value", request.getParameter("valueParameter"));
-    newItemHashMap.put("id", idRequestString);
+    Item newItemHashMap = new Item(idRequest, request.getParameter("labelParameter"), request.getParameter("valueParameter"), new HashMap<>());
 
     // for loop for all the rest
     for (int i = 1; i < numFields + 2; ++i) {
       if (request.getParameter("parameterKey" + i).compareToIgnoreCase("") != 0 && (request.getParameter("parameterValue" + i)).compareToIgnoreCase(idRequestString) != 0) {
-        newItemHashMap.put(request.getParameter("parameterKey"+i), request.getParameter("parameterValue"+i));
+        newItemHashMap.addItem(request.getParameter("parameterKey"+i), request.getParameter("parameterValue"+i));
       } else {
         continue;
       }
@@ -46,7 +44,7 @@ public class EditItemTwoServlet extends HttpServlet
     model.deleteItem(idRequest);
 
     // append the text box into the json
-    model.writeToJsonFile(newItemHashMap);
+    model.writeJsonArray(newItemHashMap);
 
     // Invoke the JSP.
     // A JSP page is actually converted into a Java class, so behind the scenes everything is Java.

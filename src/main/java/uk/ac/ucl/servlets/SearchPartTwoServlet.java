@@ -2,6 +2,7 @@ package uk.ac.ucl.servlets;
 
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
+import uk.ac.ucl.datastruct.Item;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -29,7 +30,7 @@ public class SearchPartTwoServlet extends HttpServlet
     
 
     // invoke the search operation here
-    ArrayList<HashMap<String,String>> listOfMatchingItems = model.searchFor(searchParameter, searchString);
+    ArrayList<Item> listOfMatchingItems = model.searchFor(searchParameter, searchString);
     request.setAttribute("listOfMatchingItems", listOfMatchingItems);
 
     // Invoke the JSP page.

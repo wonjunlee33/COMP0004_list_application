@@ -1,5 +1,6 @@
 <%@ page import="java.util.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="uk.ac.ucl.datastruct.Item" %>
 
 <html>
 <head>
@@ -7,7 +8,6 @@
     <title>Showing List</title>
 </head>
 <body>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <jsp:include page="/header.jsp" />
     <div class="main">
         <h2>Item Details:</h2>
@@ -15,15 +15,18 @@
             <%  
                 String idStr = request.getParameter("id");
                 int id = Integer.parseInt(idStr);
-                ArrayList<HashMap<String,String>> items = (ArrayList<HashMap<String,String>>) request.getAttribute("listOfItems");
-                HashMap<String,String> itemToDisplay = items.get(0);
-                for (HashMap<String,String> it : items) {
-                    if (it.get("id").compareTo(idStr) == 0) {
+                ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("listOfItems");
+                Item itemToDisplay = null;
+                for (Item it : items) {
+                    if (it.getId() == id) {
                         itemToDisplay = it;
                         break;
                     }
                 }
-                for (Map.Entry<String, String> entry : itemToDisplay.entrySet()) {
+            %>
+                <h3>>> <%=itemToDisplay.getLabel()%> >> <%=itemToDisplay.getProperty()%></h3>
+            <%
+                for (Map.Entry<String, String> entry : itemToDisplay.getOtherParameters().entrySet()) {
                     String key = entry.getKey();
                     String value = entry.getValue();
                     if (key.equalsIgnoreCase("url")) {
@@ -32,11 +35,11 @@
                     <% 
                     } else if (key.equalsIgnoreCase("item")) { 
                         String specificValue = value; // assuming the value parameter is stored in a local variable called value
-                        HashMap<String, String> specificItem = null;
+                        Item specificItem = null;
 
                         // iterate over the ArrayList to find the specific item
-                        for (HashMap<String, String> item : items) {
-                            if (item.get("id").equals(specificValue)) {
+                        for (Item item : items) {
+                            if (item.getId() == Integer.parseInt(specificValue)) {
                                 specificItem = item;
                                 break;
                             }
@@ -44,7 +47,7 @@
                     %>
                         <% if (specificItem != null) { %>
                             <li>
-                              <%=key%>: <a href="/specificItem.html?id=<%=value%>"><%= specificItem.get("label") %> / <%= specificItem.get("value") %></a>
+                              <%=key%>: <a href="/specificItem.html?id=<%=value%>"><%= specificItem.getLabel() %> / <%= specificItem.getProperty() %></a>
                             </li>
                         <% } else { %>
                             <li>Item not found! Please re-enter.</li>
