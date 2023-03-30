@@ -12,6 +12,7 @@ public class Item {
     private int id;
     private HashMap<String, String> otherParameters;
 
+    // defining all parameters for JSON processing
     @JsonCreator
     public Item(@JsonProperty("id") int id, @JsonProperty("label") String label, @JsonProperty("property") String property, @JsonProperty("attributes") HashMap<String,String> otherParameters) {
         this.label = label;
@@ -19,8 +20,6 @@ public class Item {
         this.id = id;
         this.otherParameters = otherParameters;
     }
-
-    // for jackson to have constructor
 
     public Item(int id) {
         this(id, null, null, null);
@@ -34,7 +33,7 @@ public class Item {
         this(id, label, property, null);
     }
 
-    // Add an item to the map
+    // add an item to the map of extra parameters
     public void addItem(String key, String value) {
         otherParameters.put(key, value);
     }
@@ -51,14 +50,16 @@ public class Item {
         return property;
     }
 
+    // edit label or value parameters
     public void editLabel(String newLabel) {
         label = newLabel;
     }
-
+    
     public void editValue(String newProperty) {
         property = newProperty;
     }
 
+    // get items from hashmap of extra parameters
     public HashMap<String,String> getOtherParameters() {
         return otherParameters;
     }
@@ -71,7 +72,7 @@ public class Item {
         return otherParameters.containsValue(value);
     }
 
-    // Remove an item from the map
+    // remove an item from the map
     public void removeOtherParameter(String key) {
         otherParameters.remove(key);
     }
@@ -89,7 +90,7 @@ public class Item {
         return keywords;
     }
 
-    // Generate keywords for full search
+    // generate keywords for full search
     public ArrayList<String> generateKeyWords() {
         ArrayList<String> keywords = new ArrayList<>();
         keywords.add(label);

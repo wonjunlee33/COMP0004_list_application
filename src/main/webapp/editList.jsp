@@ -15,7 +15,7 @@
   %>
   <form method="POST" action="/runEditListTwo.html">
     <input type="hidden" name="prevLabel" value="<%=request.getAttribute("prevLabel")%>"/>
-    <input type="text" name="editedLabel" value="<%=prevLabel%>" size="200"/>
+    <input type="text" name="editedLabel" value="<%=prevLabel%>" size="100"/>
     <input type="submit" class="btn" value="Edit"/>
   </form>  
 </div>

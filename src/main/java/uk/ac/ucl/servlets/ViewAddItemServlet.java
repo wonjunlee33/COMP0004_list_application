@@ -20,15 +20,12 @@ public class ViewAddItemServlet extends HttpServlet
 
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
   {
-    // Get the data from the model
     Model model = ModelFactory.getModel();
 
-
-    // get all the necessary data from jsp
     String numFieldsString = (String) request.getParameter("numFields");
     int numFields = Integer.parseInt(numFieldsString);
 
-    // extracting the data from the text box into a hashmap
+    // displays the right amount of fields, and preloads in the previous values for easy editing
     Item newItemHashMap = new Item(model.generateID(), request.getParameter("labelParameter"), request.getParameter("valueParameter"), new HashMap<>());
     for (int i = 1; i < numFields + 1; ++i) {
       if ((request.getParameter("parameterKey" + i) != null && !request.getParameter("parameterKey" + i).isEmpty()) && (request.getParameter("parameterValue" + i) != null && !request.getParameter("parameterValue" + i).isEmpty())) {
@@ -36,11 +33,8 @@ public class ViewAddItemServlet extends HttpServlet
       }
     }
 
-    // append the text box into the json
     model.writeJsonArray(newItemHashMap);
 
-    // Invoke the JSP.
-    // A JSP page is actually converted into a Java class, so behind the scenes everything is Java.
     ServletContext context = getServletContext();
     RequestDispatcher dispatch = context.getRequestDispatcher("/addResult.jsp");
     dispatch.forward(request, response);

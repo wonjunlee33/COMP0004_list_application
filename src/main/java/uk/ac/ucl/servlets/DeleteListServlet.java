@@ -19,21 +19,17 @@ public class DeleteListServlet extends HttpServlet
 
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
   {
-    // Get the data from the model
     Model model = ModelFactory.getModel();
-  
-    // Then add the data to the request object that will be sent to the Java Server Page, so that
-    // the JSP can access the data (a Java data structure).
+
     String labelRequest = (String) request.getParameter("deleteLabel");
-    if (labelRequest != null) {
+    if (labelRequest != null) { 
+      // delete all items that have the current label to delete
       ArrayList<Integer> itemsToDelete = model.getItemsIDFromLabel(labelRequest);
       for (int itemID : itemsToDelete) {
         model.deleteItem(itemID);
       }
     }
-  
-    // Invoke the JSP.
-    // A JSP page is actually converted into a Java class, so behind the scenes everything is Java.
+
     ServletContext context = getServletContext();
     RequestDispatcher dispatch = context.getRequestDispatcher("/deleteResult.jsp");
     dispatch.forward(request, response);

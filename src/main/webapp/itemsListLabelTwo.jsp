@@ -10,6 +10,7 @@
 <body>
 <jsp:include page="/header.jsp"/>
 <div class="main">
+  <!-- generate links to the specific items within the class -->
   <h2>Items:</h2>
   <ul>
     <%
@@ -47,7 +48,7 @@
     String deleteLabel = request.getParameter("deleteLabel");
     if(deleteLabel != null && !deleteLabel.isEmpty()) {
       request.setAttribute("deleteLabel", deleteLabel);
-      // delete the item from the model
+      // delete the item
     }
   %>
 <% } %>

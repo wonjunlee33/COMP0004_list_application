@@ -19,22 +19,21 @@ public class EditItemTwoServlet extends HttpServlet
 {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
   {
-    // Get the data from the model
     Model model = ModelFactory.getModel();
 
-    // extracting the data from the text box into a hashmap
+    // extracting the data from the text box into an item struct
     String numFieldsString = request.getParameter("numFields");
     int numFields = Integer.parseInt(numFieldsString);
     String idRequestString = request.getParameter("idRequest");
     int idRequest = Integer.parseInt(idRequestString);
 
-    // start creating new hashmap
-    Item newItemHashMap = new Item(idRequest, request.getParameter("labelParameter"), request.getParameter("valueParameter"), new HashMap<>());
+    // start creating new Item
+    Item newItem = new Item(idRequest, request.getParameter("labelParameter"), request.getParameter("valueParameter"), new HashMap<>());
 
-    // for loop for all the rest
+    // for loop for all the rest (ie filling up the hashmap of extra parameters)
     for (int i = 1; i < numFields + 2; ++i) {
       if (request.getParameter("parameterKey" + i).compareToIgnoreCase("") != 0 && (request.getParameter("parameterValue" + i)).compareToIgnoreCase(idRequestString) != 0) {
-        newItemHashMap.addItem(request.getParameter("parameterKey"+i), request.getParameter("parameterValue"+i));
+        newItem.addItem(request.getParameter("parameterKey"+i), request.getParameter("parameterValue"+i));
       } else {
         continue;
       }
@@ -43,13 +42,12 @@ public class EditItemTwoServlet extends HttpServlet
     // delete previous item
     model.deleteItem(idRequest);
 
-    // append the text box into the json
-    model.writeJsonArray(newItemHashMap);
+    // append into the json
+    model.writeJsonArray(newItem);
 
-    // Invoke the JSP.
-    // A JSP page is actually converted into a Java class, so behind the scenes everything is Java.
     ServletContext context = getServletContext();
     RequestDispatcher dispatch = context.getRequestDispatcher("/editResult.jsp");
     dispatch.forward(request, response);
   }
+  
 }

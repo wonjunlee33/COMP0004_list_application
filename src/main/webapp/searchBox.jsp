@@ -8,7 +8,6 @@
   <jsp:include page="/meta.jsp"/>
 </head>
 <body>
-  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous"> -->
 <div class="main">
   <h1>Search by <%= request.getAttribute("searchParameter") %></h1>
   <form method="POST" action="/runsearch.html">

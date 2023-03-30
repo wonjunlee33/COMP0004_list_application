@@ -11,6 +11,7 @@
 <jsp:include page="/header.jsp"/>
 <div class="main">
   <h2>Items:</h2>
+  <!-- creates the href attribute for the hyperlinked text to the specific item -->
   <ul>
     <%
       ArrayList<Item> itemsList = (ArrayList<Item>) request.getAttribute("listOfItems");

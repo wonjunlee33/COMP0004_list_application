@@ -13,6 +13,7 @@
         <h2>Item Details:</h2>
         <ul>
             <%  
+                // display everything of the id that is passed in
                 String idStr = request.getParameter("id");
                 int id = Integer.parseInt(idStr);
                 ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("listOfItems");
@@ -26,6 +27,7 @@
             %>
                 <h3>>> <%=itemToDisplay.getLabel()%> >> <%=itemToDisplay.getProperty()%></h3>
             <%
+                // check for keywords (url, image, item, list), and do not display id param
                 for (Map.Entry<String, String> entry : itemToDisplay.getOtherParameters().entrySet()) {
                     String key = entry.getKey();
                     String value = entry.getValue();

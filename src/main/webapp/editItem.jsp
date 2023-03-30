@@ -18,6 +18,7 @@
   int i = 0;
   %>
   
+  <!-- edit label and value params first -->
   <form method="POST" action="/runEditItemTwo.html">
     <input type="text" name="label" placeholder="Enter label..." size="50" value="label" required/>
     <input type="text" name="labelParameter" placeholder="Enter label parameter..." size="50" value="<%=itemToEdit.getLabel()%>" required/>
@@ -34,6 +35,7 @@
           continue;
         }
     %>
+    <!-- now edit the rest of the hashmap params -->
     <input type="text" name="parameterKey<%=i + 1%>" placeholder="Enter Parameter Name <%=i + 1%>..." size="50" value="<%=key%>"/>
     <input type="text" name="parameterValue<%=i + 1%>" placeholder="Enter Parameter Value <%=i + 1%>..." size="50" value="<%=value%>"/>
     <br>
@@ -42,6 +44,7 @@
     } 
     %>
 
+    <!-- one more field to add more items -->
     <input type="text" name="parameterKey<%=i + 1%>" placeholder="Enter Parameter Name <%=i + 1%>..." size="50" value=""/>
     <input type="text" name="parameterValue<%=i + 1%>" placeholder="Enter Parameter Value <%=i + 1%>..." size="50" value=""/>
 
@@ -49,7 +52,7 @@
     <br>
     <input type="hidden" name="numFields" value="<%=numFields%>"/>
     <input type="hidden" name="idRequest" value="<%=idRequest%>"/>
-    <input type="submit" value="Edit"/>
+    <input type="submit" class="btn" value="Edit"/>
   </form>
 
 </div>

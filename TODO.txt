@@ -1,5 +1,0 @@
-// delete function is kinda broken... fix
-// add in editing
-// add in different views for items
-    one where you can see everything
-    one where you can see only lists (kinda like now)

@@ -19,15 +19,13 @@ public class EditListTwoServlet extends HttpServlet
 {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
   {
-    // Get the data from the model
     Model model = ModelFactory.getModel();
     ArrayList<Item> fullItemList = model.getItems();
 
-    // extracting the data from the text box
     String editedLabel = request.getParameter("editedLabel");
     String prevLabel = request.getParameter("prevLabel");
 
-    // change the hashmaps accordingly
+    // take in the toEdit items, and delete them accordingly
     ArrayList<Integer> idToEdit = model.getItemsIDFromLabel(prevLabel);
     ArrayList<Item> itemsToEdit = new ArrayList<>();
     for (int id : idToEdit) {
@@ -35,12 +33,13 @@ public class EditListTwoServlet extends HttpServlet
         model.deleteItem(id);
     }
 
-    // iterate through the itemsToEdit and change the value of key "label"
+    // iterate through the itemsToEdit and change the value of key "label", and reappend back to JSON
     for (Item item : itemsToEdit) {
         item.editLabel(editedLabel);
         model.writeJsonArray(item);
     }
 
+    // this section below checks all items to see if the previous list was mentioned anywhere, and changes the reference automatically
     List<Item> itemsToDelete = new ArrayList<>();
 
     for (Item item : fullItemList) {
@@ -63,12 +62,10 @@ public class EditListTwoServlet extends HttpServlet
         model.deleteItem(item.getId());
         model.writeJsonArray(item);
     }
-    
 
-    // Invoke the JSP.
-    // A JSP page is actually converted into a Java class, so behind the scenes everything is Java.
     ServletContext context = getServletContext();
     RequestDispatcher dispatch = context.getRequestDispatcher("/editResult.jsp");
     dispatch.forward(request, response);
   }
+  
 }

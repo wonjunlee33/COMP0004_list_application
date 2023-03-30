@@ -13,8 +13,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 public class Model
 {
-  // The example code in this class should be replaced by your Model class code.
-  // The data should be stored in a suitable data structure.
+
   ArrayList<Item> list = new ArrayList<>();
 
   public ArrayList<Item> getItems() throws IOException {
@@ -41,6 +40,7 @@ public class Model
 
   }
 
+  // gets a specific item from ID 
   public Item getSpecificItem(int id) throws IOException {
     ArrayList<Item> items = getItems();
     for (Item item : items) {
@@ -104,6 +104,7 @@ public class Model
     }
   }
 
+  // gets all ID's that match the laber parameter regardless of case
   public ArrayList<Integer> getItemsIDFromLabel(String label) throws IOException {
     ArrayList<Integer> itemsID = new ArrayList<>();
     for (Item items : this.list) {
@@ -125,9 +126,7 @@ public class Model
     return null;
   }
 
-
-  // This also returns dummy data. The real version should use the keyword parameter to search
-  // the data and return a list of matching items.
+  // has three modes: searching everything, by labels, or by values
   public ArrayList<Item> searchFor(String type, String keyword) throws IOException {
     ArrayList<Item> fullItemsList = getItems();
     ArrayList<Item> itemsToReturn = new ArrayList<>();
