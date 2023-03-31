@@ -34,7 +34,7 @@ public class DeleteItemServlet extends HttpServlet
     // Invoke the JSP.
     // A JSP page is actually converted into a Java class, so behind the scenes everything is Java.
     ServletContext context = getServletContext();
-    RequestDispatcher dispatch = context.getRequestDispatcher("/deleteResult.jsp");
+    RequestDispatcher dispatch = context.getRequestDispatcher("/success.jsp");
     dispatch.forward(request, response);
   }
   
