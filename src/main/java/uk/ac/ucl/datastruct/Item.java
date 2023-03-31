@@ -5,8 +5,11 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
-public class Item {
+@JsonTypeName("item")
+
+public class Item implements ItemInterface {
     private String label;
     private String property;
     private int id;

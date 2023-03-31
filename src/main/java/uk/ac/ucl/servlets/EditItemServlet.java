@@ -2,7 +2,7 @@ package uk.ac.ucl.servlets;
 
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
-import uk.ac.ucl.datastruct.Item;
+import uk.ac.ucl.datastruct.ItemInterface;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -24,7 +24,7 @@ public class EditItemServlet extends HttpServlet
       if (idRequest != null) {
         int id = Integer.parseInt(idRequest);
     
-        Item itemToEdit = model.getSpecificItem(id);
+        ItemInterface itemToEdit = model.getSpecificItem(id);
         request.setAttribute("itemToEdit", itemToEdit);
       }
 

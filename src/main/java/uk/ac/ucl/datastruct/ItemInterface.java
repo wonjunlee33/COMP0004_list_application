@@ -1,7 +1,14 @@
 package uk.ac.ucl.datastruct;
 import java.util.ArrayList;
 import java.util.HashMap;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = Item.class, name = "item")
+})
 
 public interface ItemInterface {
     

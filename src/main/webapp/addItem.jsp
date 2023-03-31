@@ -1,5 +1,4 @@
 <%@ page language="java" %>
-<%@ page import="java.util.*" %>
 <%@ page import="uk.ac.ucl.datastruct.Item" %>
 
 

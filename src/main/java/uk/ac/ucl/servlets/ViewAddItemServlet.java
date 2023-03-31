@@ -3,6 +3,7 @@ package uk.ac.ucl.servlets;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
 import uk.ac.ucl.datastruct.Item;
+import uk.ac.ucl.datastruct.ItemInterface;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -26,7 +27,7 @@ public class ViewAddItemServlet extends HttpServlet
     int numFields = Integer.parseInt(numFieldsString);
 
     // displays the right amount of fields, and preloads in the previous values for easy editing
-    Item newItemHashMap = new Item(model.generateID(), request.getParameter("labelParameter"), request.getParameter("valueParameter"), new HashMap<>());
+    ItemInterface newItemHashMap = new Item(model.generateID(), request.getParameter("labelParameter"), request.getParameter("valueParameter"), new HashMap<>());
     for (int i = 1; i < numFields + 1; ++i) {
       if ((request.getParameter("parameterKey" + i) != null && !request.getParameter("parameterKey" + i).isEmpty()) && (request.getParameter("parameterValue" + i) != null && !request.getParameter("parameterValue" + i).isEmpty())) {
         newItemHashMap.addItem(request.getParameter("parameterKey" + i), request.getParameter("parameterValue" + i));
