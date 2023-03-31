@@ -56,6 +56,21 @@
 <p>Remember: All items must have a label and value parameter!</p>
 <p>Also, please make sure to pre-load in the number of fields required!</p>
 <p>Empty fields will not be added, so they can safely be put in if necessary.</p>
+<br>
+<p>Some specific keys:
+  <li>
+    image / img : Pass a URL to display the image.
+  </li>
+  <li>
+    url / URL : Pass a URL to display a hyperlink.
+  </li>
+  <li>
+    list : pass in a valid label to have a link to that list.
+  </li>
+  <li>
+    item : pass in a valid item ID to have a link to that item.
+  </li>
+</p>
 
 <jsp:include page="/footer.jsp"/>
 </body>
