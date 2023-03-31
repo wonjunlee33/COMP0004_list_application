@@ -36,7 +36,7 @@ public class ViewAddItemServlet extends HttpServlet
     model.writeJsonArray(newItemHashMap);
 
     ServletContext context = getServletContext();
-    RequestDispatcher dispatch = context.getRequestDispatcher("/addResult.jsp");
+    RequestDispatcher dispatch = context.getRequestDispatcher("/success.jsp");
     dispatch.forward(request, response);
   }
 }

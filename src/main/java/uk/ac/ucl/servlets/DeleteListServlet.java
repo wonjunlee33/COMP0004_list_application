@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
 
 @WebServlet("/runDeleteList.html")
 public class DeleteListServlet extends HttpServlet
@@ -31,7 +31,7 @@ public class DeleteListServlet extends HttpServlet
     }
 
     ServletContext context = getServletContext();
-    RequestDispatcher dispatch = context.getRequestDispatcher("/deleteResult.jsp");
+    RequestDispatcher dispatch = context.getRequestDispatcher("/success.jsp");
     dispatch.forward(request, response);
   }
   

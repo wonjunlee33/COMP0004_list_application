@@ -46,7 +46,7 @@ public class EditItemTwoServlet extends HttpServlet
     model.writeJsonArray(newItem);
 
     ServletContext context = getServletContext();
-    RequestDispatcher dispatch = context.getRequestDispatcher("/editResult.jsp");
+    RequestDispatcher dispatch = context.getRequestDispatcher("/success.jsp");
     dispatch.forward(request, response);
   }
   

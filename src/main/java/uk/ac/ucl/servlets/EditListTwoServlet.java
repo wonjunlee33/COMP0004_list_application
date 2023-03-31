@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/runEditListTwo.html")
 public class EditListTwoServlet extends HttpServlet
@@ -64,7 +65,7 @@ public class EditListTwoServlet extends HttpServlet
     }
 
     ServletContext context = getServletContext();
-    RequestDispatcher dispatch = context.getRequestDispatcher("/editResult.jsp");
+    RequestDispatcher dispatch = context.getRequestDispatcher("/success.jsp");
     dispatch.forward(request, response);
   }
   

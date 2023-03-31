@@ -16,3 +16,4 @@ uk/ac/ucl/servlets/DeleteListServlet.class
 uk/ac/ucl/servlets/EditItemTwoServlet.class
 uk/ac/ucl/servlets/EditListTwoServlet.class
 uk/ac/ucl/model/Model$1.class
+uk/ac/ucl/datastruct/ItemInterface.class
