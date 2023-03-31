@@ -6,6 +6,7 @@
 /Users/wonjunlee/Documents/Academics/UCL/Year1/COMP0004/coursework/COMP0004JavaWebAppExample/src/main/java/uk/ac/ucl/main/Main.java
 /Users/wonjunlee/Documents/Academics/UCL/Year1/COMP0004/coursework/COMP0004JavaWebAppExample/src/main/java/uk/ac/ucl/servlets/SearchServlet.java
 /Users/wonjunlee/Documents/Academics/UCL/Year1/COMP0004/coursework/COMP0004JavaWebAppExample/src/main/java/uk/ac/ucl/servlets/DeleteItemServlet.java
+/Users/wonjunlee/Documents/Academics/UCL/Year1/COMP0004/coursework/COMP0004JavaWebAppExample/src/main/java/uk/ac/ucl/datastruct/ItemInterface.java
 /Users/wonjunlee/Documents/Academics/UCL/Year1/COMP0004/coursework/COMP0004JavaWebAppExample/src/main/java/uk/ac/ucl/model/Model.java
 /Users/wonjunlee/Documents/Academics/UCL/Year1/COMP0004/coursework/COMP0004JavaWebAppExample/src/main/java/uk/ac/ucl/servlets/DeleteListServlet.java
 /Users/wonjunlee/Documents/Academics/UCL/Year1/COMP0004/coursework/COMP0004JavaWebAppExample/src/main/java/uk/ac/ucl/servlets/ViewItemListLabelPartTwoServlet.java

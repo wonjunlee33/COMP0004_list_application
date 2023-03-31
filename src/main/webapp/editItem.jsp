@@ -8,6 +8,8 @@
   <jsp:include page="/meta.jsp"/>
 </head>
 <body>
+<jsp:include page="/header.jsp"/>
+
 <div class="main">
   <h1>Edit Item</h1>
   <!--get the stuff from EditItemServlet-->

@@ -9,6 +9,7 @@
   <title>List Application</title>
 </head>
 <body>
+<jsp:include page="/header.jsp"/>
 <div class="main">
   <h1>Add Item</h1>
   <%int numFields = 0; // the initial number of lists to display%>

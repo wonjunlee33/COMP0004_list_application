@@ -8,6 +8,8 @@
   <jsp:include page="/meta.jsp"/>
 </head>
 <body>
+<jsp:include page="/header.jsp"/>
+
 <div class="main">
   <h1>Edit List</h1>
   <% 
@@ -19,5 +21,6 @@
     <input type="submit" class="btn" value="Edit"/>
   </form>  
 </div>
+<jsp:include page="/footer.jsp"/>
 </body>
 </html>

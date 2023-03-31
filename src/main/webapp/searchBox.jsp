@@ -8,6 +8,8 @@
   <jsp:include page="/meta.jsp"/>
 </head>
 <body>
+<jsp:include page="/header.jsp"/>
+
 <div class="main">
   <h1>Search by <%= request.getAttribute("searchParameter") %></h1>
   <form method="POST" action="/runsearch.html">
