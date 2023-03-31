@@ -3,7 +3,6 @@ package uk.ac.ucl.servlets;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
 import uk.ac.ucl.datastruct.Item;
-import uk.ac.ucl.datastruct.ItemInterface;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -29,7 +28,7 @@ public class EditItemTwoServlet extends HttpServlet
     int idRequest = Integer.parseInt(idRequestString);
 
     // start creating new Item
-    ItemInterface newItem = new Item(idRequest, request.getParameter("labelParameter"), request.getParameter("valueParameter"), new HashMap<>());
+    Item newItem = new Item(idRequest, request.getParameter("labelParameter"), request.getParameter("valueParameter"), new HashMap<>());
 
     // for loop for all the rest (ie filling up the hashmap of extra parameters)
     for (int i = 1; i < numFields + 2; ++i) {

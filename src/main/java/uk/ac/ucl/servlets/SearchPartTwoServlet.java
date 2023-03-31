@@ -2,7 +2,7 @@ package uk.ac.ucl.servlets;
 
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
-import uk.ac.ucl.datastruct.ItemInterface;
+import uk.ac.ucl.datastruct.Item;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 
 @WebServlet("/runsearch.html")
 public class SearchPartTwoServlet extends HttpServlet
@@ -25,7 +25,7 @@ public class SearchPartTwoServlet extends HttpServlet
     String searchString = (String) request.getParameter("searchString");
   
     // invoke the search operation here
-    ArrayList<ItemInterface> listOfMatchingItems = model.searchFor(searchParameter, searchString);
+    ArrayList<Item> listOfMatchingItems = model.searchFor(searchParameter, searchString);
     request.setAttribute("listOfMatchingItems", listOfMatchingItems);
 
     ServletContext context = getServletContext();

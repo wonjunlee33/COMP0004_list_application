@@ -2,7 +2,7 @@ package uk.ac.ucl.servlets;
 
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
-import uk.ac.ucl.datastruct.ItemInterface;
+import uk.ac.ucl.datastruct.Item;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @WebServlet("/runEditListTwo.html")
 public class EditListTwoServlet extends HttpServlet
@@ -21,29 +20,29 @@ public class EditListTwoServlet extends HttpServlet
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
   {
     Model model = ModelFactory.getModel();
-    ArrayList<ItemInterface> fullItemList = model.getItems();
+    ArrayList<Item> fullItemList = model.getItems();
 
     String editedLabel = request.getParameter("editedLabel");
     String prevLabel = request.getParameter("prevLabel");
 
     // take in the toEdit items, and delete them accordingly
     ArrayList<Integer> idToEdit = model.getItemsIDFromLabel(prevLabel);
-    ArrayList<ItemInterface> itemsToEdit = new ArrayList<>();
+    ArrayList<Item> itemsToEdit = new ArrayList<>();
     for (int id : idToEdit) {
         itemsToEdit.add(model.getItemFromId(id));
         model.deleteItem(id);
     }
 
     // iterate through the itemsToEdit and change the value of key "label", and reappend back to JSON
-    for (ItemInterface item : itemsToEdit) {
+    for (Item item : itemsToEdit) {
         item.editLabel(editedLabel);
         model.writeJsonArray(item);
     }
 
     // this section below checks all items to see if the previous list was mentioned anywhere, and changes the reference automatically
-    List<ItemInterface> itemsToDelete = new ArrayList<>();
+    List<Item> itemsToDelete = new ArrayList<>();
 
-    for (ItemInterface item : fullItemList) {
+    for (Item item : fullItemList) {
       if (item.otherParametersContainsKey("list") && item.otherParametersContainsValue(prevLabel)) {
         item.removeOtherParameter("list");
         item.addItem("list", editedLabel);
@@ -59,7 +58,7 @@ public class EditListTwoServlet extends HttpServlet
       }
     }
     
-    for (ItemInterface item : itemsToDelete) {
+    for (Item item : itemsToDelete) {
         model.deleteItem(item.getId());
         model.writeJsonArray(item);
     }

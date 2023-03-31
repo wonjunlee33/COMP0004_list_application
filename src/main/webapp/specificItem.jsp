@@ -1,9 +1,6 @@
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Map" %>
+<%@ page import="java.util.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="uk.ac.ucl.datastruct.Item" %>
-<%@ page import="uk.ac.ucl.datastruct.ItemInterface" %>
-
 
 <html>
 <head>
@@ -19,9 +16,9 @@
                 // display everything of the id that is passed in
                 String idStr = request.getParameter("id");
                 int id = Integer.parseInt(idStr);
-                ArrayList<ItemInterface> items = (ArrayList<ItemInterface>) request.getAttribute("listOfItems");
-                ItemInterface itemToDisplay = null;
-                for (ItemInterface it : items) {
+                ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("listOfItems");
+                Item itemToDisplay = null;
+                for (Item it : items) {
                     if (it.getId() == id) {
                         itemToDisplay = it;
                         break;
@@ -40,10 +37,10 @@
                     <% 
                     } else if (key.equalsIgnoreCase("item")) { 
                         String specificValue = value; // assuming the value parameter is stored in a local variable called value
-                        ItemInterface specificItem = null;
+                        Item specificItem = null;
 
                         // iterate over the ArrayList to find the specific item
-                        for (ItemInterface item : items) {
+                        for (Item item : items) {
                             if (item.getId() == Integer.parseInt(specificValue)) {
                                 specificItem = item;
                                 break;

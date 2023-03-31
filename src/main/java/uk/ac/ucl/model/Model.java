@@ -1,11 +1,7 @@
 package uk.ac.ucl.model;
 
 import java.io.File;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Random;
-
-import uk.ac.ucl.datastruct.ItemInterface;
+import java.util.*;
 import uk.ac.ucl.datastruct.Item;
 
 
@@ -19,17 +15,17 @@ import com.fasterxml.jackson.databind.JsonNode;
 public class Model
 {
 
-  ArrayList<ItemInterface> list = new ArrayList<>();
+  ArrayList<Item> list = new ArrayList<>();
 
-  public ArrayList<ItemInterface> getItems() throws IOException {
+  public ArrayList<Item> getItems() throws IOException {
     return this.list;
   }
 
   public int generateID() throws IOException {
-    ArrayList<ItemInterface> itemsList = getItems();
+    ArrayList<Item> itemsList = getItems();
     Random rand = new Random();
     int randomNumber = Math.abs(rand.nextInt());
-    for (ItemInterface items : itemsList) {
+    for (Item items : itemsList) {
       if (items.getId() == randomNumber) {
         randomNumber = Math.abs(rand.nextInt());
       }
@@ -40,15 +36,15 @@ public class Model
   public void readFile(File file) throws IOException
   {
     ObjectMapper mapper = new ObjectMapper();
-    TypeReference<ArrayList<ItemInterface>> typeRef = new TypeReference<ArrayList<ItemInterface>>() {};
+    TypeReference<ArrayList<Item>> typeRef = new TypeReference<ArrayList<Item>>() {};
     this.list = mapper.readValue(file, typeRef);
 
   }
 
   // gets a specific item from ID 
-  public ItemInterface getSpecificItem(int id) throws IOException {
-    ArrayList<ItemInterface> items = getItems();
-    for (ItemInterface item : items) {
+  public Item getSpecificItem(int id) throws IOException {
+    ArrayList<Item> items = getItems();
+    for (Item item : items) {
       if (item.getId() == id) {
         return item;
       }
@@ -74,7 +70,7 @@ public class Model
     return result;
   }
 
-  public void writeJsonArray(ItemInterface item) {
+  public void writeJsonArray(Item item) {
       try {
         File file = new File("src/main/java/uk/ac/ucl/storage/items.json");
 
@@ -94,7 +90,7 @@ public class Model
       File file = new File("src/main/java/uk/ac/ucl/storage/items.json");
 
       // remove the old data
-      for (ItemInterface item : this.list) {
+      for (Item item : this.list) {
         if (item.getId() == id) {
           this.list.remove(item);
           break;
@@ -112,7 +108,7 @@ public class Model
   // gets all ID's that match the laber parameter regardless of case
   public ArrayList<Integer> getItemsIDFromLabel(String label) throws IOException {
     ArrayList<Integer> itemsID = new ArrayList<>();
-    for (ItemInterface items : this.list) {
+    for (Item items : this.list) {
       if (items.getLabel().compareToIgnoreCase(label) == 0) {
         int itemID = items.getId();
         itemsID.add(itemID);
@@ -121,8 +117,8 @@ public class Model
     return itemsID;
   }
 
-  public ItemInterface getItemFromId(int id) throws IOException {
-    for (ItemInterface items : this.list) {
+  public Item getItemFromId(int id) throws IOException {
+    for (Item items : this.list) {
       int itemId = items.getId();
       if (itemId == id) {
         return items;
@@ -132,10 +128,10 @@ public class Model
   }
 
   // has three modes: searching everything, by labels, or by values
-  public ArrayList<ItemInterface> searchFor(String type, String keyword) throws IOException {
-    ArrayList<ItemInterface> fullItemsList = getItems();
-    ArrayList<ItemInterface> itemsToReturn = new ArrayList<>();
-    for (ItemInterface item : fullItemsList) {
+  public ArrayList<Item> searchFor(String type, String keyword) throws IOException {
+    ArrayList<Item> fullItemsList = getItems();
+    ArrayList<Item> itemsToReturn = new ArrayList<>();
+    for (Item item : fullItemsList) {
         boolean found = false;
         ArrayList<String> keywords = item.generateKeyWords();
         ArrayList<String> valueKeywords = item.generateKeyWordsWithoutLabels();

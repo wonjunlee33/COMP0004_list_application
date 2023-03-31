@@ -1,8 +1,6 @@
-<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="uk.ac.ucl.datastruct.Item" %>
-<%@ page import="uk.ac.ucl.datastruct.ItemInterface" %>
-
 
 <html>
 <head>
@@ -16,9 +14,9 @@
   <h2>Items:</h2>
   <ul>
     <%
-      ArrayList<ItemInterface> itemsList = (ArrayList<ItemInterface>) request.getAttribute("listOfItems");
+      ArrayList<Item> itemsList = (ArrayList<Item>) request.getAttribute("listOfItems");
       String label = (itemsList.get(0)).getLabel();
-      for (ItemInterface item : itemsList)
+      for (Item item : itemsList)
       {
         int currentID = item.getId();
         String value = item.getProperty();
